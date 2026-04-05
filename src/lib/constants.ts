@@ -1,4 +1,4 @@
-export const WHATSAPP_NUMBER = "+447453598130";
+export const WHATSAPP_NUMBER = "";
 export const WHATSAPP_BASE_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 export const SITE_NAME = "Premium IPTV";
 export const SITE_URL = "https://iptv-premium-uk.tv";
