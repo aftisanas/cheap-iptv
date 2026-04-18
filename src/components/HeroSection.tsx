@@ -84,7 +84,7 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.18 }}
           className="text-base sm:text-lg text-gray-300/90 max-w-3xl mb-3 whitespace-nowrap"
         >
-          Buy IPTV and Login in 60 Seconds — No waiting. No contracts. No dish.
+           IPTV Subscription and Login in 60 Seconds — No waiting. No contracts. No dish.
         </motion.p>
 
         {/* Hero device image — natural size, CTAs flow right under it */}
@@ -153,7 +153,7 @@ export default function HeroSection() {
             className="group relative flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-purple-900/40 transition-all hover:shadow-2xl hover:shadow-purple-500/40 active:scale-[0.98] w-full sm:w-auto justify-center"
           >
             <Play className="h-5 w-5 fill-current" />
-            <span>Buy IPTV Now — From £25.99</span>
+            <span>Buy IPTV Now — From £12.99</span>
             <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
           </Link>
