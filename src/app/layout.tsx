@@ -3,7 +3,6 @@ import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { SITE_URL } from "@/lib/constants";
 
 const inter = Inter({
@@ -108,11 +107,16 @@ export default function RootLayout({
       lang="en-GB"
       className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} antialiased`}
     >
-      <body className="min-h-screen bg-background text-foreground font-[var(--font-sans)]">
+      <body className="min-h-screen bg-background text-foreground font-(--font-sans)">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-foreground focus:shadow-lg focus:outline-2 focus:outline-violet-600"
+        >
+          Skip to main content
+        </a>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">{children}</main>
         <Footer />
-        <WhatsAppButton />
       </body>
     </html>
   );

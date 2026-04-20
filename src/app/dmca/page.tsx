@@ -4,6 +4,7 @@ import { SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "DMCA Policy",
   description: `DMCA and copyright policy for ${SITE_NAME}.`,
+  alternates: { canonical: "/dmca" },
 };
 
 export default function DMCAPage() {

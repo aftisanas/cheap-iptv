@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { X, Lock, Shield } from "lucide-react";
 import Link from "next/link";
 
@@ -24,8 +24,13 @@ export default function OrderSummaryModal({
   planPrice,
   currency = "€",
 }: OrderSummaryModalProps) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     if (!open) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
 
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -38,6 +43,7 @@ export default function OrderSummaryModal({
     return () => {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = prevOverflow;
+      previouslyFocused?.focus?.();
     };
   }, [open, onClose]);
 
@@ -68,12 +74,13 @@ export default function OrderSummaryModal({
             ORDER SUMMARY
           </h2>
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={onClose}
             aria-label="Close order summary"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-muted transition-colors hover:bg-gray-200 hover:text-foreground"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-muted transition-colors hover:bg-gray-200 hover:text-foreground focus-visible:outline-2 focus-visible:outline-violet-600 focus-visible:outline-offset-2"
           >
-            <X className="h-4 w-4" />
+            <X className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
 
@@ -111,11 +118,9 @@ export default function OrderSummaryModal({
                   </span>
                 </div>
 
-                {/* Static toggle (off) */}
+                {/* Static toggle (off) — decorative */}
                 <span
-                  role="switch"
-                  aria-checked="false"
-                  aria-label="Proxy Protection disabled"
+                  aria-hidden="true"
                   className="relative inline-flex h-6 w-11 shrink-0 items-center rounded-full bg-gray-200"
                 >
                   <span className="inline-block h-5 w-5 translate-x-0.5 rounded-full bg-white shadow" />
@@ -132,13 +137,6 @@ export default function OrderSummaryModal({
             </div>
           </div>
 
-          {/* Promo link */}
-          <button
-            type="button"
-            className="text-sm font-medium text-foreground underline decoration-gray-400 underline-offset-4 transition-colors hover:decoration-foreground"
-          >
-            Have a promo code?
-          </button>
         </div>
 
         {/* Footer */}
@@ -153,14 +151,15 @@ export default function OrderSummaryModal({
           <button
             type="button"
             onClick={onCheckout}
-            className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-500 px-6 py-3.5 text-sm font-bold tracking-wide text-white transition-all hover:shadow-lg hover:shadow-purple-500/30 active:scale-[0.99]"
+            aria-label="Proceed to secure checkout"
+            className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-500 px-6 py-3.5 text-sm font-bold tracking-wide text-white transition-all hover:shadow-lg hover:shadow-purple-500/30 active:scale-[0.99] focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
           >
-            <Lock className="h-4 w-4" />
+            <Lock className="h-4 w-4" aria-hidden="true" />
             SECURE CHECKOUT
           </button>
 
           <div className="flex items-center justify-center gap-2 text-xs text-muted">
-            <Shield className="h-3.5 w-3.5 text-emerald-600" />
+            <Shield className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
             <Link
               href="/privacy"
               className="transition-colors hover:text-foreground"

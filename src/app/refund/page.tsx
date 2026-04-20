@@ -4,6 +4,7 @@ import { SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Refund Policy",
   description: `${SITE_NAME} refund policy. 30-day money-back guarantee on all plans.`,
+  alternates: { canonical: "/refund" },
 };
 
 export default function RefundPage() {

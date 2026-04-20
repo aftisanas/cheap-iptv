@@ -115,7 +115,7 @@ export default function PromoBanner() {
 
       <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-5 py-4 sm:py-5 gap-2 sm:gap-2.5">
         <div className="flex items-center gap-2">
-          <span className="text-yellow-400 text-base drop-shadow-[0_0_10px_rgba(250,204,21,0.6)]">⚡</span>
+          <span aria-hidden="true" className="text-yellow-400 text-base drop-shadow-[0_0_10px_rgba(250,204,21,0.6)]">⚡</span>
           <span
             className="text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase"
             style={{
@@ -125,21 +125,21 @@ export default function PromoBanner() {
           >
             Limited Time Reduction
           </span>
-          <span className="text-yellow-400 text-base drop-shadow-[0_0_10px_rgba(250,204,21,0.6)]">⚡</span>
+          <span aria-hidden="true" className="text-yellow-400 text-base drop-shadow-[0_0_10px_rgba(250,204,21,0.6)]">⚡</span>
         </div>
 
-        <h3
+        <h2
           className="text-lg sm:text-xl md:text-2xl font-extrabold text-white leading-tight"
           style={{ textShadow: "0 0 30px rgba(139, 92, 246, 0.55)" }}
         >
-          🔥 Claim Your Discount Before It Ends 🔥
-        </h3>
+          <span aria-hidden="true">🔥 </span>Claim Your Discount Before It Ends<span aria-hidden="true"> 🔥</span>
+        </h2>
 
         <p
           className="text-xs sm:text-sm font-medium"
           style={{ color: "rgba(196, 181, 253, 0.9)" }}
         >
-          <span className="text-emerald-400">✅</span>{" "}
+          <span aria-hidden="true" className="text-emerald-400">✅</span>{" "}
           30-Day Money Back Guarantee — Zero Risk. Cancel Anytime.
         </p>
 
@@ -162,9 +162,9 @@ export default function PromoBanner() {
 
         <p
           className="text-[10px] sm:text-[11px] mt-0.5"
-          style={{ color: "rgba(203, 213, 225, 0.7)" }}
+          style={{ color: "rgba(226, 232, 240, 0.9)" }}
         >
-          🔒 Secure Payment &nbsp;·&nbsp; ⚡ Instant Activation &nbsp;·&nbsp; 50,000+ IPTV UK Subscribers
+          <span aria-hidden="true">🔒</span> Secure Payment &nbsp;·&nbsp; <span aria-hidden="true">⚡</span> Instant Activation &nbsp;·&nbsp; 50,000+ IPTV UK Subscribers
         </p>
       </div>
     </div>

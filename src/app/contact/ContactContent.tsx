@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MessageCircle, Clock, MapPin, Headphones, Star, HeadphonesIcon } from "lucide-react";
+import { Mail, Phone, MessageCircle, Clock, MapPin, Headphones, Star } from "lucide-react";
 import { WHATSAPP_BASE_URL, CONTACT_EMAIL, WHATSAPP_NUMBER } from "@/lib/constants";
 
 const contactMethods = [
@@ -88,7 +88,7 @@ export default function ContactContent() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 rounded-full border border-purple-400/20 bg-white/[0.07] backdrop-blur-md px-5 py-2.5 text-sm text-purple-200 mb-8"
           >
-            <HeadphonesIcon className="h-4 w-4 text-cyan-400" />
+            <Headphones className="h-4 w-4 text-cyan-400" />
             <span className="font-medium">Dedicated UK Support — 24/7</span>
             <span className="flex gap-0.5 text-amber-400">
               {[...Array(5)].map((_, i) => <Star key={i} className="h-3 w-3 fill-current" />)}

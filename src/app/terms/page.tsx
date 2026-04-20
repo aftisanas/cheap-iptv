@@ -4,6 +4,7 @@ import { SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: `Terms and conditions for using ${SITE_NAME} IPTV services.`,
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

@@ -22,9 +22,13 @@ export default function ParticleBackground() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    const isMobile = window.matchMedia("(max-width: 640px)").matches;
     let animationId: number;
     const particles: Particle[] = [];
-    const particleCount = 40;
+    const particleCount = isMobile ? 16 : 26;
 
     const resize = () => {
       const parent = canvas.parentElement;
@@ -67,20 +71,24 @@ export default function ParticleBackground() {
         ctx.fill();
       });
 
-      // Draw faint connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+      // Draw faint connections (skip on mobile for perf)
+      if (!isMobile) {
+        const maxDistSq = 150 * 150;
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distSq = dx * dx + dy * dy;
 
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `hsla(270, 60%, 70%, ${0.06 * (1 - dist / 150)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
+            if (distSq < maxDistSq) {
+              const dist = Math.sqrt(distSq);
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `hsla(270, 60%, 70%, ${0.06 * (1 - dist / 150)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
           }
         }
       }
@@ -91,11 +99,21 @@ export default function ParticleBackground() {
     init();
     animate();
 
+    const handleVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else {
+        animate();
+      }
+    };
+
     window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
 

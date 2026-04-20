@@ -47,10 +47,12 @@ export default function Navbar() {
               <div className="relative h-12 w-12 lg:h-14 lg:w-14 shrink-0">
                 <Image
                   src="/buy-iptv-uk.webp"
-                  alt="Buy IPTV UK — Best IPTV Subscription Service"
+                  alt="Buy IPTV UK logo"
                   fill
+                  sizes="(min-width: 1024px) 56px, 48px"
                   className="object-contain drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]"
                   priority
+                  fetchPriority="high"
                 />
               </div>
               <span className={cn(
@@ -101,10 +103,12 @@ export default function Navbar() {
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
               className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden",
+                "flex h-10 w-10 items-center justify-center rounded-lg transition-colors lg:hidden focus-visible:outline-2 focus-visible:outline-violet-600 focus-visible:outline-offset-2",
                 isScrolled ? "hover:bg-violet-50" : "hover:bg-white/10"
               )}
-              aria-label="Toggle menu"
+              aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileOpen}
+              aria-controls="mobile-navigation"
             >
               {isMobileOpen ? (
                 <X className={cn("h-5 w-5", isScrolled ? "text-foreground" : "text-white")} />
@@ -120,13 +124,19 @@ export default function Navbar() {
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-40 lg:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Main navigation"
           >
-            <div
+            <button
+              type="button"
+              aria-label="Close menu"
               className="absolute inset-0 bg-black/40 backdrop-blur-sm"
               onClick={() => setIsMobileOpen(false)}
             />

@@ -17,8 +17,10 @@ export default function Footer() {
               <div className="relative h-12 w-12 shrink-0">
                 <Image
                   src="/buy-iptv-uk.webp"
-                  alt="Buy IPTV UK — Best IPTV Subscription Service"
+                  alt="Buy IPTV UK logo"
                   fill
+                  sizes="48px"
+                  loading="lazy"
                   className="object-contain drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]"
                 />
               </div>
@@ -116,7 +118,7 @@ export default function Footer() {
             <p className="text-xs text-muted text-center sm:text-left">
               © {new Date().getFullYear()} buy-iptv-uk.com — Buy IPTV UK | Best IPTV UK 4K Packages | Trusted UK IPTV Provider
             </p>
-            <p className="text-xs text-gray-400 text-center sm:text-right max-w-md">
+            <p className="text-xs text-gray-500 text-center sm:text-right max-w-md">
               {SITE_NAME} is not affiliated with any television networks or content providers.
               All trademarks are property of their respective owners.
             </p>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BLOG_POSTS } from "@/lib/constants";
+import { BLOG_POSTS, SITE_URL, SITE_NAME } from "@/lib/constants";
 import BlogPostContent from "./BlogPostContent";
 
 const blogContent: Record<string, { content: string[] }> = {
@@ -61,11 +61,13 @@ export async function generateMetadata({ params }: { params: Promise<PageParams>
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
       publishedTime: post.date,
+      url: `${SITE_URL}/blog/${post.slug}`,
     },
   };
 }
@@ -79,5 +81,35 @@ export default async function BlogPostPage({ params }: { params: Promise<PagePar
     notFound();
   }
 
-  return <BlogPostContent post={post} content={content.content} />;
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Organization", name: SITE_NAME },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/buy-iptv-uk.webp`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${post.slug}`,
+    },
+  };
+
+  return (
+    <>
+      <BlogPostContent post={post} content={content.content} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+      />
+    </>
+  );
 }
