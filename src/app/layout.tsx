@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit, JetBrains_Mono } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -9,45 +9,47 @@ const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
 });
 
 const outfit = Outfit({
   variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["600", "700"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Buy IPTV UK | IPTV Subscription With 37,000 Channels in 4K From £4.99",
-    template: "%s | Buy IPTV UK",
+    default: "Cheap IPTV 2026 | Cheapest UK IPTV Service From £4.99",
+    template: "%s | Cheap IPTV",
   },
   description:
-    "Buy IPTV in the UK and get 37,000 channels, 4K UHD, built-in VPN and instant setup. From £4.99 with a 30-day money-back guarantee. Activate in 60 seconds.",
+    "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. The best-value IPTV subscription in Britain. £4.99.",
   keywords: [
-    "buy IPTV UK",
-    "buy IPTV",
-    "IPTV UK",
-    "IPTV subscription",
-    "best IPTV UK",
-    "cheap IPTV UK",
-    "IPTV providers",
-    "UK IPTV providers",
-    "IPTV 4K UK",
-    "IPTV Firestick UK",
+    "cheap iptv",
+    "cheap iptv subscription",
+    "cheap iptv uk",
+    "cheapest iptv",
+    "iptv subscription",
+    "iptv uk",
+    "best iptv uk",
+    "iptv providers",
+    "iptv service",
+    "buy iptv",
+    "british iptv",
+    "premium iptv",
   ],
-  authors: [{ name: "Buy IPTV UK" }],
-  creator: "Buy IPTV UK",
-  applicationName: "Buy IPTV UK",
+  authors: [{ name: "Cheap IPTV" }],
+  creator: "Cheap IPTV",
+  applicationName: "Cheap IPTV",
   alternates: {
     canonical: "/",
+    languages: {
+      "en-GB": "/",
+    },
   },
   manifest: "/favicon_io/site.webmanifest",
   icons: {
@@ -66,17 +68,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_GB",
-    siteName: "Buy IPTV UK",
+    siteName: "Cheap IPTV",
     url: SITE_URL,
-    title: "Buy IPTV UK — 37,000 Channels, 4K UHD, From £4.99",
+    title: "Cheap IPTV UK 2026 — Maximum Streaming For Minimum Spend",
     description:
-      "Ready to buy IPTV in the UK? Get 37,000 live channels, 198,000 on-demand titles, five screens and 24/7 UK support. Activate the moment you pay.",
+      "The cheap IPTV subscription 50,000 UK homes trust. 37,000 channels, premium 4K quality, instant activation. Buy IPTV without breaking the bank.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Buy IPTV UK — 37,000 Channels, 4K UHD, From £4.99",
+    title: "Cheap IPTV UK 2026 — Maximum Streaming For Minimum Spend",
     description:
-      "Buy IPTV in the UK and get 37,000 channels, 4K UHD, built-in VPN and instant setup. From £4.99 with a 30-day money-back guarantee.",
+      "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. From £4.99.",
   },
   robots: {
     index: true,
@@ -105,7 +107,7 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} antialiased`}
+      className={`${inter.variable} ${outfit.variable} antialiased`}
     >
       <body className="min-h-screen bg-background text-foreground font-(--font-sans)">
         <a

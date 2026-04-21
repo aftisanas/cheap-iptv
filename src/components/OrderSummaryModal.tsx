@@ -14,7 +14,7 @@ type OrderSummaryModalProps = {
 };
 
 const formatPrice = (value: number, currency: string) =>
-  `${value.toFixed(2)} ${currency}`;
+  `${currency}${value.toFixed(2)}`;
 
 export default function OrderSummaryModal({
   open,
@@ -22,7 +22,7 @@ export default function OrderSummaryModal({
   onCheckout,
   planName,
   planPrice,
-  currency = "€",
+  currency = "£",
 }: OrderSummaryModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 

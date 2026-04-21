@@ -18,7 +18,7 @@ export default function Footer() {
               <div className="relative h-12 w-12 shrink-0">
                 <Image
                   src="/buy-iptv-uk.webp"
-                  alt="Buy IPTV UK logo"
+                  alt="Cheap IPTV logo"
                   fill
                   sizes="48px"
                   loading="lazy"
@@ -26,12 +26,11 @@ export default function Footer() {
                 />
               </div>
               <span className="text-lg font-bold text-foreground">
-                Buy<span className="gradient-text"> IPTV </span>UK
+                Cheap<span className="gradient-text"> IPTV </span>UK
               </span>
             </Link>
             <p className="text-sm text-muted leading-relaxed mb-6">
-              Premium IPTV subscription built specifically for viewers in the
-              United Kingdom. 37,000+ live channels, 198,000+ VOD titles.
+              The cheap IPTV subscription 50,000 UK homes trust. 37,000 live channels, 198,000 films and series, 4K UHD and built-in VPN — from £25.99.
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-muted">
@@ -89,7 +88,7 @@ export default function Footer() {
         <div className="border-t border-violet-100/50 py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-muted text-center sm:text-left">
-              © {new Date().getFullYear()} buy-iptv-uk.com — Buy IPTV UK | Best IPTV UK 4K Packages | Trusted UK IPTV Provider
+              © {new Date().getFullYear()} cheap-iptv.tv — Cheap IPTV | Cheapest IPTV UK | Budget IPTV Service | Buy IPTV UK
             </p>
             <p className="text-xs text-gray-500 text-center sm:text-right max-w-md">
               {SITE_NAME} is not affiliated with any television networks or content providers.

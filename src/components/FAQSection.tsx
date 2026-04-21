@@ -26,19 +26,18 @@ export default function FAQSection() {
             Frequently Asked Questions
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Buy IPTV UK FAQ &mdash; Common{" "}
-            <span className="gradient-text">Questions, Answered</span>
+            Cheap IPTV &mdash; Frequently{" "}
+            <span className="gradient-text">Asked Questions</span>
           </h2>
           <p className="text-lg text-muted">
             Essential information to{" "}
             <Link href="/blog" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
               review
             </Link>{" "}
-            before{" "}
+            before choosing a{" "}
             <SectionLink href="/#pricing" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
-              buy IPTV
-            </SectionLink>{" "}
-            in the UK.
+              cheap IPTV subscription
+            </SectionLink>.
           </p>
         </motion.div>
 

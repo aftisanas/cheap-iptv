@@ -1,6 +1,13 @@
 {
-  "name": "Buy IPTV UK",
-  "short_name": "Buy IPTV UK",
+  "name": "Cheap IPTV",
+  "short_name": "Cheap IPTV",
+  "description": "Cheap IPTV UK subscription — 37,000 channels, 4K UHD, built-in VPN, five screens, from £25.99.",
+  "scope": "/",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a",
+  "lang": "en-GB",
   "icons": [
     {
       "src": "/favicon_io/android-chrome-192x192.png",
@@ -12,9 +19,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "theme_color": "#0a0a0a",
-  "background_color": "#0a0a0a",
-  "display": "standalone",
-  "start_url": "/"
+  ]
 }

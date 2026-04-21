@@ -10,6 +10,7 @@ import TrustSection from "@/components/TrustSection";
 import CTASection from "@/components/CTASection";
 import {
   CONTACT_EMAIL,
+  FAQ_ITEMS,
   PRICING_PLANS,
   SITE_NAME,
   SITE_URL,
@@ -73,7 +74,7 @@ export default function HomePage() {
                 "@type": "WebPage",
                 "@id": webpageId,
                 url: SITE_URL,
-                name: "Buy IPTV UK | IPTV Subscription",
+                name: "Cheap IPTV 2026 | Cheapest UK IPTV Service From £4.99",
                 inLanguage: "en-GB",
                 isPartOf: {
                   "@id": websiteId,
@@ -82,7 +83,7 @@ export default function HomePage() {
                   "@id": organizationId,
                 },
                 description:
-                  "Buy IPTV in the UK with instant activation, 4K UHD channels, multi-device streaming, and 24/7 support.",
+                  "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens and a 30-day guarantee — the best-value IPTV subscription in Britain.",
               },
             ],
           }),
@@ -99,7 +100,7 @@ export default function HomePage() {
             url: SITE_URL,
             image: [logoUrl],
             description:
-              "Buy IPTV UK subscription with 37,000+ live channels and 198,000+ VOD titles in HD & 4K quality.",
+              "Cheap IPTV subscription with 37,000+ live channels, 198,000+ on-demand titles, 4K UHD, five screens and built-in VPN — from £4.99.",
             brand: { "@type": "Brand", name: SITE_NAME },
             offers: PRICING_PLANS.map((plan) => ({
               "@type": "Offer",
@@ -113,7 +114,7 @@ export default function HomePage() {
             aggregateRating: {
               "@type": "AggregateRating",
               ratingValue: "4.9",
-              reviewCount: "2847",
+              reviewCount: "50000",
               bestRating: "5",
             },
           }),
@@ -125,40 +126,14 @@ export default function HomePage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "How do I buy IPTV in the UK?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Choose a plan on this page, pay by card or PayPal and check your email. Your login and setup guide land in under 60 seconds. You do not need any technical knowledge to get started.",
-                },
+            mainEntity: FAQ_ITEMS.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer,
               },
-              {
-                "@type": "Question",
-                name: "Is it safe to buy IPTV online?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes, when you buy from a provider with a secure checkout and a money-back guarantee. We use Stripe and PayPal for all payments, and no card data touches our servers.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "What is the best IPTV UK package to buy?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "The 12-month plan is our best-seller because it cuts the monthly rate by 40 percent while covering every channel, screen and VOD title. The 24-month plan saves 55 percent for viewers who are committed.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Can I buy IPTV for a Firestick?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes. Install IPTV Smarters Pro from the Amazon store, open the app, and enter the M3U credentials from your welcome email. The full 37,000-channel guide loads in under two minutes.",
-                },
-              },
-            ],
+            })),
           }),
         }}
       />

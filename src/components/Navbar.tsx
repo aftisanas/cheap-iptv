@@ -48,7 +48,7 @@ export default function Navbar() {
               <div className="relative h-12 w-12 lg:h-14 lg:w-14 shrink-0">
                 <Image
                   src="/buy-iptv-uk.webp"
-                  alt="Buy IPTV UK logo"
+                  alt="Cheap IPTV logo"
                   fill
                   sizes="(min-width: 1024px) 56px, 48px"
                   className="object-contain drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]"
@@ -60,7 +60,7 @@ export default function Navbar() {
                 "text-lg font-bold tracking-tight lg:text-xl font-[var(--font-display)] transition-colors duration-500",
                 isScrolled ? "text-foreground" : "text-white"
               )}>
-                Buy<span className={isScrolled ? "gradient-text" : "text-cyan-400"}> IPTV </span>UK
+                Cheap<span className={isScrolled ? "gradient-text" : "text-cyan-400"}> IPTV </span>UK
               </span>
             </Link>
 

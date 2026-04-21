@@ -7,23 +7,27 @@ import Link from "next/link";
 const trustItems = [
   {
     icon: Shield,
-    title: "30-Day Full Refund When You Buy IPTV Subscription",
-    description: "Contact us within 30 days of purchase and we return every penny. No form to fill, no long wait, no excuses.",
+    title: "30-Day Money-Back Guarantee On Every IPTV Subscription",
+    description:
+      "Contact support within 30 days and every penny returns same-day. No forms, no retention scripts — the safety net that makes trying cheap IPTV completely risk-free.",
   },
   {
     icon: Wifi,
-    title: "Fast IPTV Performance with 99.9% Uptime Guarantee",
-    description: "Our monitoring system watches each server every 30 seconds. If a node drops, your stream reroutes before you notice a flicker.",
+    title: "99.9% Uptime On Strong IPTV Servers",
+    description:
+      "A live status page tracks server health minute by minute. If uptime dips below 99.9 percent, service credits apply automatically — budget pricing on infrastructure that does not cut corners.",
   },
   {
     icon: Lock,
-    title: "IPTV Subscription UK 4K Security & Private Checkout",
-    description: "TLS 1.3 protects your checkout and our built-in VPN protects your streams. Your IP and viewing history stay off the record from the first play.",
+    title: "Built-In VPN — Premium IPTV Privacy Included Free",
+    description:
+      "The VPN encrypts every stream with no latency penalty and no bandwidth cap. No logs, no separate app, no add-on fee — privacy at the same quality level as services charging three times more.",
   },
   {
     icon: ServerCog,
-    title: "Cheap IPTV Pricing with Instant Digital Delivery",
-    description: "Automation sends your login the moment your payment settles. There is no human in the loop and no working-hours delay.",
+    title: "24/7 UK Support — British IPTV Help That Never Sleeps",
+    description:
+      "A named British team answers live chat, WhatsApp and email around the clock. Average first response: under four minutes — premium support delivered at a budget price.",
   },
 ];
 
@@ -40,18 +44,17 @@ export default function TrustSection() {
           className="text-center mb-16"
         >
           <span className="inline-block rounded-full bg-emerald-50 border border-emerald-200 px-4 py-1.5 text-sm font-medium text-emerald-700 mb-4">
-            Trust & Guarantee
+            Four Hard Promises
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Buy IPTV With Confidence &mdash; Backed by{" "}
-            <span className="gradient-text">Four Hard Guarantees</span>
+            The Cheap IPTV Guarantee &mdash; Four Promises{" "}
+            <span className="gradient-text">That Protect Your Money</span>
           </h2>
           <p className="mx-auto max-w-xl text-lg text-muted">
-            Every order is backed by four hard guarantees — if any one fails, a full{" "}
+            Cheap does not mean risky. Every commitment below is published, measured and backed by a full{" "}
             <Link href="/refund" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
               same-day refund
-            </Link>{" "}
-            is issued.
+            </Link>.
           </p>
         </motion.div>
 

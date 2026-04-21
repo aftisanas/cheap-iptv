@@ -18,18 +18,18 @@ export default function TestimonialsSection() {
           className="text-center mb-16"
         >
           <span className="inline-block rounded-full bg-amber-50 border border-amber-200 px-4 py-1.5 text-sm font-medium text-amber-700 mb-4">
-            Trusted by Thousands
+            Trustpilot Average 4.9/5
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Real UK Buyer Feedback in Independent{" "}
-            <span className="gradient-text">IPTV Reviews</span>
+            Cheap IPTV Reviews &mdash; What 50,000 UK Subscribers{" "}
+            <span className="gradient-text">Say About Value</span>
           </h2>
           <p className="mx-auto max-w-xl text-lg text-muted">
             Genuine{" "}
             <SectionLink href="/#testimonials" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
-              UK customer reviews
-            </SectionLink>
-            , real purchases, real results — no scripted lines, no paid placement.
+              IPTV reviews
+            </SectionLink>{" "}
+            from verified customers who switched from satellite and streaming bundles — real purchases, no scripted lines.
           </p>
         </motion.div>
 

@@ -32,15 +32,10 @@
   --color-hero-border: rgba(255, 255, 255, 0.08);
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
   --font-display: 'Outfit', system-ui, sans-serif;
 
   --animate-float: float 6s ease-in-out infinite;
-  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
-  --animate-shimmer: shimmer 2.5s linear infinite;
-  --animate-slide-up: slide-up 0.6s ease-out;
   --animate-fade-in: fade-in 0.5s ease-out;
-  --animate-count-up: count-up 0.4s ease-out;
 }
 
 @keyframes float {
@@ -48,29 +43,14 @@
   50% { transform: translateY(-20px); }
 }
 
-@keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-@keyframes count-up {
-  from { opacity: 0; transform: scale(0.5); }
-  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes gradient-shift {
@@ -121,14 +101,6 @@ body {
   border: 1px solid rgba(196, 181, 253, 0.3);
 }
 
-/* Glass effect — dark (for hero) */
-.glass-dark {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
 /* Gradient text — purple to cyan */
 .gradient-text {
   background: linear-gradient(135deg, #7c3aed, #6d28d9, #0891b2);
@@ -147,53 +119,12 @@ body {
   background-clip: text;
 }
 
-.gradient-text-gold {
-  background: linear-gradient(135deg, #d97706, #f59e0b, #d97706);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Glow effects */
-.glow-blue {
-  box-shadow: 0 0 20px rgba(109, 40, 217, 0.12), 0 0 60px rgba(109, 40, 217, 0.05);
-}
-
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(8, 145, 178, 0.12), 0 0 60px rgba(8, 145, 178, 0.05);
-}
-
-.glow-purple {
-  box-shadow: 0 0 30px rgba(124, 58, 237, 0.15), 0 0 80px rgba(124, 58, 237, 0.05);
-}
-
 /* Particle canvas */
 .particles-container {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-}
-
-/* Animated border gradient */
-.animated-border {
-  position: relative;
-  overflow: hidden;
-}
-
-.animated-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #7c3aed, #0891b2, #22d3ee, #7c3aed);
-  background-size: 300% 300%;
-  animation: gradient-shift 4s ease infinite;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
 }
 
 /* Aurora background blobs for hero */
@@ -213,16 +144,6 @@ body {
 .section-gradient-2 {
   background: linear-gradient(180deg, #fafbff 0%, #ecfeff 50%, #fafbff 100%);
 }
-
-.section-gradient-3 {
-  background: linear-gradient(180deg, var(--color-background) 0%, #fef3c7 10%, #fff7ed 30%, var(--color-background) 100%);
-}
-
-/* Pricing plan card accents */
-.plan-bronze { border-color: #d97706; }
-.plan-silver { border-color: #94a3b8; }
-.plan-gold { border-color: #7c3aed; }
-.plan-diamond { border-color: #8b5cf6; }
 
 /* Premium card hover */
 .premium-card {

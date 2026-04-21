@@ -84,8 +84,8 @@ export default function ContactContent() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6"
           >
-            <span className="text-white">Contact Our IPTV UK</span>{" "}
-            <span className="gradient-text-hero">Support Team</span>
+            <span className="text-white">Contact The Cheap IPTV</span>{" "}
+            <span className="gradient-text-hero">UK Support Team</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -95,7 +95,7 @@ export default function ContactContent() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="mx-auto max-w-2xl text-lg text-gray-300/90 leading-relaxed"
           >
-            The UK-based Buy IPTV UK support team is available 24/7 via live chat, email, and WhatsApp — real people with deep knowledge of the UK market.
+            The UK-based Cheap IPTV support team is available 24/7 via live chat, email and WhatsApp — a named British team with deep knowledge of the UK market. Average first response: under four minutes.
           </motion.p>
         </div>
 

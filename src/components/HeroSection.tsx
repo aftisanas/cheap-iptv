@@ -70,10 +70,10 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.1] mb-2"
         >
-          <span className="text-white">Buy IPTV UK — IPTV Subscription</span>
+          <span className="text-white">Cheap IPTV 2026 — The Best-Value</span>
           <br />
-          <span className="text-white">To </span>
-          <span className="gradient-text-hero">37,000 Channels In 4K</span>
+          <span className="text-white">IPTV UK </span>
+          <span className="gradient-text-hero">Subscription From £4.99</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -81,9 +81,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.18 }}
-          className="text-base sm:text-lg text-gray-300/90 max-w-3xl mb-3 px-2 sm:px-0 sm:whitespace-nowrap"
+          className="text-base sm:text-lg text-gray-300/90 max-w-3xl mb-3 px-2 sm:px-0"
         >
-           IPTV Subscription and Login in 60 Seconds — No waiting. No contracts. No dish.
+          37,000 live channels, 198,000 films and 4K UHD streaming — the cheap IPTV service 50,000 UK homes already trust. Rated 4.9/5.
         </motion.p>
 
         {/* Promo banner — replaces hero device image */}
@@ -108,7 +108,7 @@ export default function HeroSection() {
             className="group relative flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-500 px-7 py-3.5 text-sm sm:text-base font-semibold text-white shadow-lg shadow-purple-900/40 transition-all hover:shadow-2xl hover:shadow-purple-500/40 active:scale-[0.98] w-full sm:w-auto justify-center"
           >
             <Play className="h-5 w-5 fill-current" />
-            <span>Buy IPTV Now — Starting at £12.99/month</span>
+            <span>Get Cheap IPTV Now — From £4.99</span>
             <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
           </SectionLink>
@@ -117,7 +117,7 @@ export default function HeroSection() {
             className="group flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-sm px-7 py-3.5 text-sm sm:text-base font-semibold text-white transition-all hover:border-purple-400/30 hover:bg-white/10 w-full sm:w-auto justify-center"
           >
             <MessageCircle className="h-5 w-5 text-cyan-400" />
-            <span>See All Plans</span>
+            <span>Compare All Plans</span>
           </SectionLink>
         </motion.div>
       </div>

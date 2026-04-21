@@ -20,18 +20,18 @@ export default function DevicesSection() {
           className="text-center mb-16"
         >
           <span className="inline-block rounded-full bg-cyan-50 border border-cyan-200 px-4 py-1.5 text-sm font-medium text-cyan-700 mb-4">
-            Multi-Device Access
+            Runs Everywhere
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Buy IPTV Once &mdash; Watch Across{" "}
-            <span className="gradient-text">Every Household Screen</span>
+            Cheap IPTV On Every Screen &mdash;{" "}
+            <span className="gradient-text">The IPTV Service That Runs Everywhere</span>
           </h2>
           <p className="mx-auto max-w-xl text-lg text-muted">
-            One{" "}
+            One budget-friendly{" "}
             <SectionLink href="/#pricing" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
-              IPTV purchase
-            </SectionLink>
-            , one login, five screens — the IPTV service runs on every device in the household with no extra hardware required.
+              IPTV subscription
+            </SectionLink>{" "}
+            powers every device in the household. No extra hardware, no add-on fees, no paid app purchases required.
           </p>
         </motion.div>
 
