@@ -30,7 +30,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-muted leading-relaxed mb-6">
-              The cheap IPTV subscription 50,000 UK homes trust. 37,000 live channels, 198,000 films and series, 4K UHD and built-in VPN — from £25.99.
+              The cheap IPTV subscription 50,000 UK homes trust. 37,000 live channels, 198,000 films and series, 4K UHD and built-in VPN — from £4.99/month.
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-muted">

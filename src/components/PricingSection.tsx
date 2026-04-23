@@ -106,11 +106,11 @@ export default function PricingSection() {
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-violet-50 border border-violet-200 px-5 py-2 text-sm font-semibold text-violet-700 mb-5">
             <Gem className="h-4 w-4" />
-            Four Price Points, One Premium Experience
+            Four Price Points, One Premium IPTV Experience
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-5">
             Cheap IPTV Plans &mdash;{" "}
-            <span className="gradient-text">Four Price Points, One Premium Experience</span>
+            <span className="gradient-text">Four Price Points, One Premium IPTV Experience</span>
           </h2>
           <p className="mx-auto max-w-2xl text-base text-muted leading-relaxed">
             Every IPTV subscription delivers the identical 37,000-channel library, 4K UHD, built-in VPN and five simultaneous screens. The only difference is commitment length and the discount that comes with it.

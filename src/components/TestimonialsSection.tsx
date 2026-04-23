@@ -21,7 +21,7 @@ export default function TestimonialsSection() {
             Trustpilot Average 4.9/5
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Cheap IPTV Reviews &mdash; What 50,000 UK Subscribers{" "}
+            Cheap IPTV Reviews &mdash; What 50,000 IPTV UK Subscribers{" "}
             <span className="gradient-text">Say About Value</span>
           </h2>
           <p className="mx-auto max-w-xl text-lg text-muted">

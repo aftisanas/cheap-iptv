@@ -278,11 +278,6 @@ export const FAQ_ITEMS = [
       "Yes. Every subscription supports five simultaneous streams. Parents, children and housemates can all watch different channels in 4K at the same time on a single account.",
   },
   {
-    question: "Is this cheap IPTV legal in the UK?",
-    answer:
-      "Yes. Streaming through a licensed provider is legal. A registered UK business address and a named contact for regulatory enquiries are published on the site.",
-  },
-  {
     question: "What devices are supported?",
     answer:
       "Amazon Firestick, Android TV, Samsung Tizen, LG webOS, Apple TV, iPhone, iPad, Android phones, MAG boxes, Formuler, Enigma2, Windows PC and Mac. Six apps are officially supported with setup guides.",
@@ -295,7 +290,7 @@ export const FAQ_ITEMS = [
   {
     question: "How does this compare to Sky?",
     answer:
-      "Sky Ultimate with Sports and Cinema costs roughly seventy-five pounds per month on a 24-month contract. This cheap IPTV subscription delivers 37,000 channels from £25.99 with no lock-in. More content, lower price, greater flexibility.",
+      "Sky Ultimate with Sports and Cinema costs roughly seventy-five pounds per month on a 24-month contract. This cheap IPTV subscription delivers 37,000 channels from £4.99/month with no lock-in. More content, lower price, greater flexibility.",
   },
   {
     question: "Is a separate VPN required?",
@@ -318,11 +313,11 @@ export const CHANNEL_CATEGORIES = [
       "Sky Sports Main Event through Arena, TNT Sports, Premier Sports, Eurosport and every racing channel. Every Premier League match, Champions League night and Six Nations weekend streams live in HD or 4K — all inside the cheapest IPTV UK package.",
   },
   {
-    name: "British Entertainment — BBC To Sky Atlantic",
+    name: "British IPTV Entertainment — Premium & Complete Line-Up",
     count: "500+",
     icon: "Tv" as const,
     channels:
-      "BBC One through Four, ITV1 to ITV4, Channel 4, Channel 5, E4, More4, Dave, Gold, Sky Max and Sky Atlantic. Regional variants and +1 timeshift feeds included — the full British line-up at a fraction of the satellite cost.",
+      "A full selection of top-tier British entertainment in high quality, covering drama, reality, and everyday favorites. Includes regional options and time-shift features — delivering a complete experience at a fraction of traditional costs.",
   },
   {
     name: "On-Demand Cinema — 198,000 Films And Series",
@@ -336,7 +331,7 @@ export const CHANNEL_CATEGORIES = [
     count: "800+",
     icon: "Baby" as const,
     channels:
-      "CBeebies, CBBC, Nickelodeon, Nick Jr, Cartoon Network and Disney Channel in HD. A four-digit PIN locks any channel from the parental control tab — safe viewing for every household.",
+      "A wide range of family-friendly content in high quality, designed to keep kids entertained while giving parents peace of mind. Built-in parental controls with a secure PIN ensure safe viewing for every household.",
   },
   {
     name: "Rolling News From Trusted IPTV Providers UK",
