@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative h-[104vh] min-h-[640px] flex flex-col overflow-hidden"
+      className="relative min-h-[100dvh] md:h-[104vh] md:min-h-[840px] flex flex-col overflow-hidden"
     >
       {/* ── Deep premium gradient background ── */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0118] via-[#1a0a3e] to-[#0c1445]" />
