@@ -1,6 +1,8 @@
 export const SITE_NAME = "Cheap IPTV";
 export const SITE_URL = "https://cheap-iptv.tv";
-export const CONTACT_EMAIL = "contact@cheap-iptv.tv";
+// Live mailbox. Intentionally on buy-iptv-uk.com — there is no
+// contact@cheap-iptv.tv mailbox, so pointing at it would black-hole support mail.
+export const CONTACT_EMAIL = "contact@buy-iptv-uk.com";
 
 // Single source of truth for the brand logo used in structured data.
 // Must point at a real file in /public (verified: /cheap-iptv.webp exists).
