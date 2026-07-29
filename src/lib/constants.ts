@@ -2,12 +2,45 @@ export const SITE_NAME = "Cheap IPTV";
 export const SITE_URL = "https://cheap-iptv.tv";
 export const CONTACT_EMAIL = "contact@buy-iptv-uk.com";
 
+/** Single source of truth for the Organization / Article publisher logo. */
+export const LOGO_PATH = "/cheap-iptv.webp";
+export const LOGO_URL = `${SITE_URL}${LOGO_PATH}`;
+
+/**
+ * BreadcrumbList JSON-LD. Pass the trail after Home, e.g.
+ * `[{ name: "Blog", path: "/blog" }, { name: post.title, path: `/blog/${slug}` }]`.
+ */
+export function buildBreadcrumbLd(trail: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [{ name: "Home", path: "/" }, ...trail].map(
+      (crumb, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: crumb.name,
+        item: `${SITE_URL}${crumb.path}`,
+      })
+    ),
+  };
+}
+
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Why Us", href: "/#features" },
   { label: "Pricing", href: "/#pricing" },
-  { label: "Reviews", href: "/#testimonials" },
   { label: "FAQ", href: "/#faq" },
+] as const;
+
+/**
+ * Crawlable cluster pages. Rendered in the footer so the homepage still passes
+ * them link equity (they were previously orphaned) without crowding the navbar.
+ */
+export const GUIDE_LINKS = [
+  { label: "Cheapest IPTV", href: "/cheapest-iptv" },
+  { label: "IPTV Subscription", href: "/iptv-subscription" },
+  { label: "IPTV Provider", href: "/iptv-service-provider" },
+  { label: "Blog", href: "/blog" },
 ] as const;
 
 export const LEGAL_LINKS = [
@@ -21,7 +54,7 @@ export const STATS = [
   { value: "37,000+", label: "Live Channels" },
   { value: "198,000+", label: "Films & Series" },
   { value: "99.9%", label: "Uptime" },
-  { value: "50,000+", label: "UK Subscribers" },
+  { value: "30-Day", label: "Money-Back Guarantee" },
 ] as const;
 
 export const FEATURES = [
@@ -32,7 +65,7 @@ export const FEATURES = [
     icon: "Tv" as const,
   },
   {
-    title: "Premium IPTV Quality In Native 4K UHD",
+    title: "Premium Streaming Quality In Native 4K UHD",
     description:
       "Every plan streams in native 4K when the broadcaster supports it. Adaptive bitrate keeps the picture rock-steady when broadband fluctuates — premium visuals at a fraction of the premium price tag.",
     icon: "Monitor" as const,
@@ -62,9 +95,9 @@ export const FEATURES = [
     icon: "Shield" as const,
   },
   {
-    title: "IPTV Reviews Confirm 4.9/5 From 50,000 Subscribers",
+    title: "Try It Risk-Free — 30-Day Money-Back Guarantee",
     description:
-      "Independent IPTV reviews across Trustpilot and Reddit consistently rate this service 4.9 out of 5. Fifty thousand UK households chose the affordable option and stayed.",
+      "Every plan is covered for a full thirty days. If the service does not meet expectations, contact support and the payment is returned same-day — no forms, no proof required, no retention call.",
     icon: "Film" as const,
   },
   {
@@ -86,6 +119,7 @@ export const PRICING_PLANS = [
     perMonth: 8.66,
     period: "3 months",
     devices: 5,
+    extraConnectionPrice: 7.25,
     badge: "Low Commitment",
     discount: "-48%",
     accentColor: "violet",
@@ -108,13 +142,14 @@ export const PRICING_PLANS = [
     tier: "Silver",
     name: "6 Months",
     subtitle: "Six months of premium streaming at a budget price",
-    price: 39.99,
+    price: 35.99,
     originalPrice: 69.99,
-    perMonth: 6.66,
+    perMonth: 6.00,
     period: "6 months",
     devices: 5,
+    extraConnectionPrice: 9.50,
     badge: "Half-Year Savings",
-    discount: "-43%",
+    discount: "-49%",
     accentColor: "violet",
     features: [
       "37,000+ live channels with full UK coverage",
@@ -128,20 +163,21 @@ export const PRICING_PLANS = [
       "Instant activation in under 60 seconds",
     ],
     popular: false,
-    savings: "Save 43%",
+    savings: "Save 49%",
   },
   {
     id: "gold",
     tier: "Gold",
     name: "12 Months",
     subtitle: "The best-selling cheap IPTV plan in the UK",
-    price: 59.99,
+    price: 49.99,
     originalPrice: 99.99,
-    perMonth: 4.99,
+    perMonth: 4.17,
     period: "year",
     devices: 5,
-    badge: "Most Popular — Save 40%",
-    discount: "-40%",
+    extraConnectionPrice: 29.00,
+    badge: "Most Popular — Save 50%",
+    discount: "-50%",
     accentColor: "blue",
     features: [
       "37,000+ live channels with full UK coverage",
@@ -155,20 +191,21 @@ export const PRICING_PLANS = [
       "Instant activation in under 60 seconds",
     ],
     popular: true,
-    savings: "Save 40%",
+    savings: "Save 50%",
   },
   {
     id: "diamond",
     tier: "Diamond",
     name: "24 Months",
     subtitle: "Two years locked at the cheapest rate — full quality guaranteed",
-    price: 89.99,
+    price: 79.99,
     originalPrice: 199.99,
-    perMonth: 3.75,
+    perMonth: 3.33,
     period: "2 years",
     devices: 5,
-    badge: "Deepest Discount — Save 55%",
-    discount: "-55%",
+    extraConnectionPrice: 58.00,
+    badge: "Deepest Discount — Save 60%",
+    discount: "-60%",
     accentColor: "violet",
     features: [
       "37,000+ live channels with full UK coverage",
@@ -182,7 +219,7 @@ export const PRICING_PLANS = [
       "Instant activation in under 60 seconds",
     ],
     popular: false,
-    savings: "Save 55%",
+    savings: "Save 60%",
   },
 ] as const;
 
@@ -260,7 +297,7 @@ export const FAQ_ITEMS = [
   {
     question: "How much does the cheapest plan cost?",
     answer:
-      "The entry price works out to twelve pounds ninety-nine per month on the three-month plan. Longer commitments reduce the per-month cost further — the 24-month plan saves 55 percent compared to monthly equivalents.",
+      "The entry price works out to eight pounds sixty-six per month on the three-month plan. Longer commitments reduce the per-month cost further — the 24-month plan lands at three pounds thirty-three per month, a 60 percent saving against its standard price.",
   },
   {
     question: "Is there a hidden fee for 4K or VPN?",
@@ -290,7 +327,7 @@ export const FAQ_ITEMS = [
   {
     question: "How does this compare to traditional pay-TV?",
     answer:
-      "A premium pay-TV bundle with sports and cinema costs roughly seventy-five pounds per month on a 24-month contract. This cheap IPTV subscription delivers 37,000 channels from £4.99/month with no lock-in. More content, lower price, greater flexibility.",
+      "A premium pay-TV bundle with sports and cinema costs roughly seventy-five pounds per month on a 24-month contract. This cheap IPTV subscription delivers 37,000 channels from £3.33/month with no lock-in. More content, lower price, greater flexibility.",
   },
   {
     question: "Is a separate VPN required?",
@@ -356,7 +393,8 @@ export const BLOG_POSTS = [
     excerpt:
       "Finding the best IPTV service in the UK means looking beyond flashy promises. This guide breaks down the 7 criteria that matter most for British viewers — from channel quality and reliability to support and genuine value.",
     date: "2026-04-01",
-    readTime: "12 min read",
+    updated: "2026-07-28",
+    readTime: "11 min read",
     category: "Guide",
   },
   {
@@ -365,7 +403,8 @@ export const BLOG_POSTS = [
     excerpt:
       "A complete, beginner-friendly guide to installing and configuring IPTV on an Amazon Fire Stick. Stream in under 10 minutes using the step-by-step instructions below.",
     date: "2026-03-20",
-    readTime: "6 min read",
+    updated: "2026-07-28",
+    readTime: "10 min read",
     category: "Tutorial",
   },
   {
@@ -374,7 +413,8 @@ export const BLOG_POSTS = [
     excerpt:
       "An honest comparison of cheap IPTV and traditional UK TV packages. Costs, channel availability, picture quality, flexibility and value — everything needed to decide.",
     date: "2026-03-15",
-    readTime: "8 min read",
+    updated: "2026-07-28",
+    readTime: "10 min read",
     category: "Comparison",
   },
   {
@@ -383,7 +423,8 @@ export const BLOG_POSTS = [
     excerpt:
       "Top-tier UK football, domestic cup ties, European nights and combat sports — all covered in stunning HD and 4K quality through a cheap IPTV subscription.",
     date: "2026-03-10",
-    readTime: "5 min read",
+    updated: "2026-07-28",
+    readTime: "9 min read",
     category: "Sports",
   },
 ] as const;
@@ -391,24 +432,46 @@ export const BLOG_POSTS = [
 export const WHATSAPP_NUMBER = "447878757831"; // E.164 format, no + or spaces
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
+/** Flat add-on, identical across every plan. */
+export const PROXY_PROTECTION_PRICE = 15.0;
+
+/** Most extra connections that can be added to a plan on top of the 5 included. */
+export const MAX_EXTRA_CONNECTIONS = 5;
+
+/** The extra-connection price is per-plan — see `extraConnectionPrice` on PRICING_PLANS. */
 export function buildWhatsAppCheckoutUrl(params: {
   planName: string;
   planPrice: number;
   proxyProtection?: boolean;
-  extraConnection?: boolean;
+  extraConnections?: number;
+  extraConnectionPrice?: number;
 }): string {
+  const extraConnectionPrice = params.extraConnectionPrice ?? 0;
+  const extraConnections = params.extraConnections ?? 0;
+
   const lines = [
     `Hi cheap-iptv.tv team! I'd like to subscribe to:`,
     ``,
     `Plan: ${params.planName} — £${params.planPrice.toFixed(2)}`,
   ];
 
+  let total = params.planPrice;
+
   if (params.proxyProtection) {
-    lines.push(`Add-on: Proxy Protection (+£15.00)`);
+    total += PROXY_PROTECTION_PRICE;
+    lines.push(`Add-on: Proxy Protection (+£${PROXY_PROTECTION_PRICE.toFixed(2)})`);
   }
 
-  if (params.extraConnection) {
-    lines.push(`Add-on: Extra Connection`);
+  if (extraConnections > 0) {
+    const extraConnectionsTotal = extraConnectionPrice * extraConnections;
+    total += extraConnectionsTotal;
+    lines.push(
+      `Add-on: Extra Connection x${extraConnections} — £${extraConnectionPrice.toFixed(2)} each (+£${extraConnectionsTotal.toFixed(2)})`
+    );
+  }
+
+  if (total !== params.planPrice) {
+    lines.push(``, `Total: £${total.toFixed(2)}`);
   }
 
   lines.push(``, `Please send me the next steps to complete payment.`);

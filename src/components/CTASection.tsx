@@ -53,7 +53,7 @@ export default function CTASection() {
             className="inline-flex items-center gap-2 rounded-full border border-purple-400/20 bg-white/[0.07] backdrop-blur-md px-5 py-2 text-sm text-purple-300 mb-8"
           >
             <Sparkles className="h-4 w-4 text-cyan-400" />
-            <span className="font-medium">Join 50,000+ UK Households</span>
+            <span className="font-medium">Join Thousands Of UK Households</span>
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
@@ -61,7 +61,7 @@ export default function CTASection() {
             <span className="gradient-text-hero">Keep More Money In Your Pocket</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-300/90 mb-10 leading-relaxed">
-            Over 50,000 UK homes already switched to the smartest deal in British television. The 24-month{" "}
+            Thousands of UK homes have already switched to the smartest deal in British television. The 24-month{" "}
             <SectionLink href="/#pricing" className="text-cyan-300 hover:text-cyan-200 underline-offset-2 hover:underline">
               cheap IPTV plan
             </SectionLink>{" "}
@@ -81,7 +81,7 @@ export default function CTASection() {
               className="group relative flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-500 px-8 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:shadow-purple-500/30 active:scale-[0.98] w-full sm:w-auto justify-center"
             >
               <Play className="h-5 w-5 fill-current" />
-              Get Cheap IPTV Now — From £4.99
+              Get Cheap IPTV Now — From £3.33
               <div className="absolute inset-0 rounded-2xl bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
             </SectionLink>
             <a

@@ -23,11 +23,11 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Cheap IPTV 2026 | Cheapest UK IPTV Service From £4.99",
+    default: "Cheap IPTV UK 2026 | Best Cheap IPTV Subscription From £3.33",
     template: "%s | Cheap IPTV",
   },
   description:
-    "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. The best-value IPTV subscription in Britain. £4.99.",
+    "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. The best-value IPTV subscription in Britain. £3.33.",
   keywords: [
     "cheap iptv",
     "cheap iptv subscription",
@@ -72,13 +72,13 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Cheap IPTV UK 2026 — Maximum Streaming For Minimum Spend",
     description:
-      "The cheap IPTV subscription 50,000 UK homes trust. 37,000 channels, premium 4K quality, instant activation. Buy IPTV without breaking the bank.",
+      "The cheap IPTV subscription thousands of UK homes trust. 37,000 channels, premium 4K quality, instant activation. Buy IPTV without breaking the bank.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Cheap IPTV UK 2026 — Maximum Streaming For Minimum Spend",
     description:
-      "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. From £4.99.",
+      "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. From £3.33.",
   },
   robots: {
     index: true,

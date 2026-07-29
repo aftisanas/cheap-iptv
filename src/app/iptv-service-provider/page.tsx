@@ -4,10 +4,19 @@ import { ChevronDown, MessageCircle, Play, ShieldCheck } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import TrustSection from "@/components/TrustSection";
 import SectionLink from "@/components/SectionLink";
-import { CONTACT_EMAIL, PRICING_PLANS, SITE_NAME, SITE_URL, WHATSAPP_URL } from "@/lib/constants";
+import {
+  buildBreadcrumbLd,
+  CONTACT_EMAIL,
+  LOGO_URL,
+  PRICING_PLANS,
+  SITE_NAME,
+  SITE_URL,
+  WHATSAPP_URL,
+} from "@/lib/constants";
 
 const PAGE_PATH = "/iptv-service-provider";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
+const BREADCRUMB_NAME = "IPTV Service Provider";
 const LAST_UPDATED_DISPLAY = "26 May 2026";
 const LAST_UPDATED_ISO = "2026-05-26";
 
@@ -94,7 +103,7 @@ const PAGE_FAQS: ReadonlyArray<{ question: string; answer: string }> = [
 export default function IPTVServiceProviderPage() {
   const webpageId = `${PAGE_URL}#webpage`;
   const organizationId = `${SITE_URL}/#organization`;
-  const logoUrl = `${SITE_URL}/buy-iptv-uk.webp`;
+  const logoUrl = LOGO_URL;
 
   return (
     <>
@@ -516,6 +525,16 @@ export default function IPTVServiceProviderPage() {
               },
             })),
           }),
+        }}
+      />
+
+      {/* JSON-LD: BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            buildBreadcrumbLd([{ name: BREADCRUMB_NAME, path: PAGE_PATH }])
+          ),
         }}
       />
     </>

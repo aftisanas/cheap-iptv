@@ -91,6 +91,16 @@ export default function BlogPostContent({ post, content }: BlogPostContentProps)
                         </h2>
                       );
                     }
+                    if (line.startsWith("### ")) {
+                      return (
+                        <h3
+                          key={j}
+                          className="text-lg font-bold text-foreground mt-7 mb-3"
+                        >
+                          {line.replace("### ", "")}
+                        </h3>
+                      );
+                    }
                     if (line.startsWith("- **")) {
                       const match = line.match(/- \*\*(.+?)\*\*(.+)/);
                       if (match) {
@@ -141,7 +151,7 @@ export default function BlogPostContent({ post, content }: BlogPostContentProps)
               Ready to Start Streaming?
             </h3>
             <p className="text-muted mb-6">
-              Get started with Premium IPTV today. Plans from £4.99 with a 30-day money-back guarantee.
+              Get started with cheap-iptv.tv today. Plans from £25.99 for three months with a 30-day money-back guarantee.
             </p>
             <SectionLink
               href="/#pricing"

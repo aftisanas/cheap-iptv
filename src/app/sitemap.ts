@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     Boolean(post.slug)
   ).map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: parseDateOrNow(post.date),
+    lastModified: parseDateOrNow(post.updated ?? post.date),
     changeFrequency: "monthly",
     priority: 0.7,
   }));

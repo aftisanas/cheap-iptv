@@ -18,10 +18,10 @@ export default function TestimonialsSection() {
           className="text-center mb-16"
         >
           <span className="inline-block rounded-full bg-amber-50 border border-amber-200 px-4 py-1.5 text-sm font-medium text-amber-700 mb-4">
-            Trustpilot Average 4.9/5
+            In Their Own Words
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Cheap IPTV Reviews &mdash; What 50,000 IPTV UK Subscribers{" "}
+            Cheap IPTV Reviews &mdash; What UK Subscribers{" "}
             <span className="gradient-text">Say About Value</span>
           </h2>
           <p className="mx-auto max-w-xl text-lg text-muted">

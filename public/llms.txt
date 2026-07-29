@@ -1,0 +1,60 @@
+# cheap-iptv.tv
+
+> A UK IPTV subscription service. One price covers 37,000+ live channels,
+> 198,000+ films and series, 4K UHD streaming, five simultaneous screens and a
+> built-in VPN. Checkout is handled over WhatsApp; credentials are delivered by
+> email within 60 seconds of payment.
+
+## Plans
+
+All four plans carry the identical channel library, streaming quality, device
+support, screen count and VPN. Only the commitment length and the discount
+change. Prices are one-time payments in GBP, not recurring charges.
+
+| Plan    | Term      | Price  | Works out at | Extra connection |
+|---------|-----------|--------|--------------|------------------|
+| Bronze  | 3 months  | £25.99 | £8.66/month  | £7.25            |
+| Silver  | 6 months  | £35.99 | £6.00/month  | £9.50            |
+| Gold    | 12 months | £49.99 | £4.17/month  | £29.00           |
+| Diamond | 24 months | £79.99 | £3.33/month  | £58.00           |
+
+Optional add-ons: Proxy Protection £15.00 (flat), Extra Connection (priced per
+plan, see table above — adds a sixth simultaneous stream for the full term).
+
+## What every plan includes
+
+- 37,000+ live channels with full UK coverage
+- 198,000+ films, series and documentaries on demand
+- Full EPG with 7-day catch-up TV
+- HD, Full HD and 4K UHD streaming with adaptive bitrate
+- Five simultaneous screens on one account
+- Built-in VPN at no extra cost
+- 24/7 UK support via live chat, WhatsApp and email
+- 30-day money-back guarantee
+- Activation in under 60 seconds
+
+## Supported devices
+
+Amazon Fire Stick, Android TV, Samsung Tizen, LG webOS, Apple TV, iPhone, iPad,
+Android phones, MAG boxes, Formuler, Enigma2, Windows PC and Mac.
+
+## Key pages
+
+- [Home](https://cheap-iptv.tv/): plans, features, FAQ
+- [Cheapest IPTV](https://cheap-iptv.tv/cheapest-iptv): plan-by-plan price breakdown and what "cheap" means here
+- [IPTV Subscription](https://cheap-iptv.tv/iptv-subscription): choosing a term, what is included, cancellation
+- [IPTV Service Provider](https://cheap-iptv.tv/iptv-service-provider): how the service is operated and supported
+- [Blog](https://cheap-iptv.tv/blog): setup guides and comparisons
+
+## Guides
+
+- [Best IPTV UK 2026](https://cheap-iptv.tv/blog/best-iptv-uk-guide-2026): the 7 criteria to judge a provider on
+- [Fire Stick setup](https://cheap-iptv.tv/blog/how-to-setup-iptv-firestick): step-by-step install
+- [IPTV vs traditional UK TV](https://cheap-iptv.tv/blog/iptv-vs-traditional-tv): cost and feature comparison
+- [Live UK sports](https://cheap-iptv.tv/blog/live-uk-sports-streaming-guide): sports channel coverage
+
+## Notes
+
+- Service area: United Kingdom. Language: English (en-GB).
+- cheap-iptv.tv is not affiliated with any television network or content
+  provider. All trademarks belong to their respective owners.

@@ -11,9 +11,11 @@ import CTASection from "@/components/CTASection";
 import {
   CONTACT_EMAIL,
   FAQ_ITEMS,
+  LOGO_URL,
   PRICING_PLANS,
   SITE_NAME,
   SITE_URL,
+  TESTIMONIALS,
 } from "@/lib/constants";
 
 export default function HomePage() {
@@ -21,7 +23,18 @@ export default function HomePage() {
   const websiteId = `${SITE_URL}/#website`;
   const webpageId = `${SITE_URL}/#webpage`;
   const productId = `${SITE_URL}/#product`;
-  const logoUrl = `${SITE_URL}/buy-iptv-uk.webp`;
+  const serviceId = `${SITE_URL}/#service`;
+  const logoUrl = LOGO_URL;
+
+  // Ratings are derived from the testimonials actually rendered on this page,
+  // so the aggregate stays substantiated per Google's Product policy.
+  const reviewCount = TESTIMONIALS.length;
+  const ratingValue = (
+    TESTIMONIALS.reduce((sum, t) => sum + t.rating, 0) / reviewCount
+  ).toFixed(1);
+
+  // Rolling one-year-forward validity for offer prices.
+  const priceValidUntil = `${new Date().getFullYear() + 1}-12-31`;
 
   return (
     <>
@@ -74,7 +87,7 @@ export default function HomePage() {
                 "@type": "WebPage",
                 "@id": webpageId,
                 url: SITE_URL,
-                name: "Cheap IPTV 2026 | Cheapest UK IPTV Service From £4.99",
+                name: "Cheap IPTV UK 2026 | Best Cheap IPTV Subscription From £3.33",
                 inLanguage: "en-GB",
                 isPartOf: {
                   "@id": websiteId,
@@ -100,23 +113,61 @@ export default function HomePage() {
             url: SITE_URL,
             image: [logoUrl],
             description:
-              "Cheap IPTV subscription with 37,000+ live channels, 198,000+ on-demand titles, 4K UHD, five screens and built-in VPN — from £4.99.",
+              "Cheap IPTV subscription with 37,000+ live channels, 198,000+ on-demand titles, 4K UHD, five screens and built-in VPN — from £3.33.",
             brand: { "@type": "Brand", name: SITE_NAME },
             offers: PRICING_PLANS.map((plan) => ({
               "@type": "Offer",
               name: `${plan.name} Plan`,
               price: plan.price.toFixed(2),
               priceCurrency: "GBP",
+              priceValidUntil,
               availability: "https://schema.org/InStock",
               itemCondition: "https://schema.org/NewCondition",
               url: `${SITE_URL}/#pricing`,
             })),
+            review: TESTIMONIALS.map((testimonial) => ({
+              "@type": "Review",
+              author: { "@type": "Person", name: testimonial.name },
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: String(testimonial.rating),
+                bestRating: "5",
+              },
+              reviewBody: testimonial.text,
+            })),
             aggregateRating: {
               "@type": "AggregateRating",
-              ratingValue: "4.9",
-              reviewCount: "50000",
+              ratingValue,
+              reviewCount: String(reviewCount),
               bestRating: "5",
             },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "@id": serviceId,
+            name: `${SITE_NAME} Subscription`,
+            serviceType: "IPTV subscription",
+            url: SITE_URL,
+            image: [logoUrl],
+            areaServed: { "@type": "Country", name: "GB" },
+            provider: { "@id": organizationId },
+            description:
+              "IPTV streaming subscription for UK households — 37,000+ live channels, 198,000+ on-demand titles, 4K UHD, five simultaneous screens and a built-in VPN.",
+            offers: PRICING_PLANS.map((plan) => ({
+              "@type": "Offer",
+              name: `${plan.name} Plan`,
+              price: plan.price.toFixed(2),
+              priceCurrency: "GBP",
+              priceValidUntil,
+              availability: "https://schema.org/InStock",
+              url: `${SITE_URL}/#pricing`,
+            })),
           }),
         }}
       />
