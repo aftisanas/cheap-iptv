@@ -268,11 +268,14 @@ export default function PricingSection() {
         </motion.div>
       </div>
 
+      {/* Keyed by plan so add-on toggles reset when a different plan is opened */}
       <OrderSummaryModal
+        key={selectedPlan?.id ?? "none"}
         open={selectedPlan !== null}
         onClose={() => setSelectedPlan(null)}
         planName={selectedPlan ? toAccessLabel(selectedPlan.name) : ""}
         planPrice={selectedPlan?.price ?? 0}
+        extraConnectionPrice={selectedPlan?.extraConnectionPrice ?? 0}
       />
     </section>
   );

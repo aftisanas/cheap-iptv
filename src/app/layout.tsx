@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Cheap IPTV UK 2026 — Maximum Streaming For Minimum Spend",
     description:
-      "The cheap IPTV subscription 50,000 UK homes trust. 37,000 channels, premium 4K quality, instant activation. Buy IPTV without breaking the bank.",
+      "The cheap IPTV subscription thousands of UK homes trust. 37,000 channels, premium 4K quality, instant activation. Buy IPTV without breaking the bank.",
   },
   twitter: {
     card: "summary_large_image",

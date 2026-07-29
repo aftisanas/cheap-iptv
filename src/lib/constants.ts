@@ -1,6 +1,8 @@
 export const SITE_NAME = "Cheap IPTV";
 export const SITE_URL = "https://cheap-iptv.tv";
-export const CONTACT_EMAIL = "contact@cheap-iptv.tv";
+// Live mailbox. Intentionally on buy-iptv-uk.com — there is no
+// contact@cheap-iptv.tv mailbox, so pointing at it would black-hole support mail.
+export const CONTACT_EMAIL = "contact@buy-iptv-uk.com";
 
 // Single source of truth for the brand logo used in structured data.
 // Must point at a real file in /public (verified: /cheap-iptv.webp exists).
@@ -16,7 +18,6 @@ export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Why Us", href: "/#features" },
   { label: "Pricing", href: "/#pricing" },
-  { label: "Reviews", href: "/#testimonials" },
   { label: "FAQ", href: "/#faq" },
 ] as const;
 
@@ -31,7 +32,7 @@ export const STATS = [
   { value: "37,000+", label: "Live Channels" },
   { value: "198,000+", label: "Films & Series" },
   { value: "99.9%", label: "Uptime" },
-  { value: "50,000+", label: "UK Subscribers" },
+  { value: "30-Day", label: "Money-Back Guarantee" },
 ] as const;
 
 export const FEATURES = [
@@ -72,9 +73,9 @@ export const FEATURES = [
     icon: "Shield" as const,
   },
   {
-    title: "IPTV Reviews Confirm 4.9/5 From 50,000 Subscribers",
+    title: "Try It Risk-Free — 30-Day Money-Back Guarantee",
     description:
-      "Independent IPTV reviews across Trustpilot and Reddit consistently rate this service 4.9 out of 5. Fifty thousand UK households chose the affordable option and stayed.",
+      "Every plan is covered for a full thirty days. If the service does not meet expectations, contact support and the payment is returned same-day — no forms, no proof required, no retention call.",
     icon: "Film" as const,
   },
   {
@@ -96,6 +97,7 @@ export const PRICING_PLANS = [
     perMonth: 8.66,
     period: "3 months",
     devices: 5,
+    extraConnectionPrice: 7.25,
     badge: "Low Commitment",
     discount: "-48%",
     accentColor: "violet",
@@ -123,6 +125,7 @@ export const PRICING_PLANS = [
     perMonth: 6.0,
     period: "6 months",
     devices: 5,
+    extraConnectionPrice: 9.50,
     badge: "Half-Year Savings",
     discount: "-49%",
     accentColor: "violet",
@@ -150,6 +153,7 @@ export const PRICING_PLANS = [
     perMonth: 4.17,
     period: "year",
     devices: 5,
+    extraConnectionPrice: 29.00,
     badge: "Most Popular — Save 50%",
     discount: "-50%",
     accentColor: "blue",
@@ -177,6 +181,7 @@ export const PRICING_PLANS = [
     perMonth: 3.33,
     period: "2 years",
     devices: 5,
+    extraConnectionPrice: 58.00,
     badge: "Deepest Discount — Save 60%",
     discount: "-60%",
     accentColor: "violet",
@@ -411,24 +416,46 @@ export const BLOG_POSTS = [
 export const WHATSAPP_NUMBER = "447878757831"; // E.164 format, no + or spaces
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
+/** Flat add-on, identical across every plan. */
+export const PROXY_PROTECTION_PRICE = 15.0;
+
+/** Most extra connections that can be added to a plan on top of the 5 included. */
+export const MAX_EXTRA_CONNECTIONS = 5;
+
+/** The extra-connection price is per-plan — see `extraConnectionPrice` on PRICING_PLANS. */
 export function buildWhatsAppCheckoutUrl(params: {
   planName: string;
   planPrice: number;
   proxyProtection?: boolean;
-  extraConnection?: boolean;
+  extraConnections?: number;
+  extraConnectionPrice?: number;
 }): string {
+  const extraConnectionPrice = params.extraConnectionPrice ?? 0;
+  const extraConnections = params.extraConnections ?? 0;
+
   const lines = [
     `Hi cheap-iptv.tv team! I'd like to subscribe to:`,
     ``,
     `Plan: ${params.planName} — £${params.planPrice.toFixed(2)}`,
   ];
 
+  let total = params.planPrice;
+
   if (params.proxyProtection) {
-    lines.push(`Add-on: Proxy Protection (+£15.00)`);
+    total += PROXY_PROTECTION_PRICE;
+    lines.push(`Add-on: Proxy Protection (+£${PROXY_PROTECTION_PRICE.toFixed(2)})`);
   }
 
-  if (params.extraConnection) {
-    lines.push(`Add-on: Extra Connection`);
+  if (extraConnections > 0) {
+    const extraConnectionsTotal = extraConnectionPrice * extraConnections;
+    total += extraConnectionsTotal;
+    lines.push(
+      `Add-on: Extra Connection x${extraConnections} — £${extraConnectionPrice.toFixed(2)} each (+£${extraConnectionsTotal.toFixed(2)})`
+    );
+  }
+
+  if (total !== params.planPrice) {
+    lines.push(``, `Total: £${total.toFixed(2)}`);
   }
 
   lines.push(``, `Please send me the next steps to complete payment.`);
