@@ -1,9 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Clock, ArrowLeft, Tag } from "lucide-react";
+import { Clock, ArrowLeft, Tag, User } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import SectionLink from "@/components/SectionLink";
+
+interface RelatedLink {
+  title: string;
+  href: string;
+}
 
 interface BlogPostContentProps {
   post: {
@@ -15,9 +21,64 @@ interface BlogPostContentProps {
     category: string;
   };
   content: string[];
+  author: string;
+  related: RelatedLink[];
 }
 
-export default function BlogPostContent({ post, content }: BlogPostContentProps) {
+// Render inline markdown: [text](/path) links and **bold** spans.
+function renderInline(text: string): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  const pattern = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+    if (match[1] && match[2]) {
+      const href = match[2];
+      const label = match[1];
+      if (href.startsWith("/")) {
+        nodes.push(
+          <Link
+            key={key++}
+            href={href}
+            className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
+          >
+            {label}
+          </Link>
+        );
+      } else {
+        nodes.push(
+          <a
+            key={key++}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
+          >
+            {label}
+          </a>
+        );
+      }
+    } else if (match[3]) {
+      nodes.push(
+        <strong key={key++} className="text-foreground">
+          {match[3]}
+        </strong>
+      );
+    }
+    lastIndex = pattern.lastIndex;
+  }
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+  return nodes;
+}
+
+export default function BlogPostContent({ post, content, author, related }: BlogPostContentProps) {
   return (
     <div className="pt-20">
       <article className="py-16 lg:py-24">
@@ -42,10 +103,14 @@ export default function BlogPostContent({ post, content }: BlogPostContentProps)
             animate={{ opacity: 1, y: 0 }}
             className="mb-12"
           >
-            <div className="flex items-center gap-4 text-sm text-muted mb-4">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-muted mb-4">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
                 <Tag className="h-3 w-3" />
                 {post.category}
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <User className="h-3 w-3" />
+                {author}
               </span>
               <span>
                 {new Date(post.date).toLocaleDateString("en-GB", {
@@ -91,37 +156,13 @@ export default function BlogPostContent({ post, content }: BlogPostContentProps)
                         </h2>
                       );
                     }
-                    if (line.startsWith("### ")) {
-                      return (
-                        <h3
-                          key={j}
-                          className="text-lg font-bold text-foreground mt-7 mb-3"
-                        >
-                          {line.replace("### ", "")}
-                        </h3>
-                      );
-                    }
-                    if (line.startsWith("- **")) {
-                      const match = line.match(/- \*\*(.+?)\*\*(.+)/);
-                      if (match) {
-                        return (
-                          <li
-                            key={j}
-                            className="text-sm text-gray-600 leading-relaxed ml-4 mb-2 list-disc"
-                          >
-                            <strong className="text-foreground">{match[1]}</strong>
-                            {match[2]}
-                          </li>
-                        );
-                      }
-                    }
                     if (line.startsWith("- ")) {
                       return (
                         <li
                           key={j}
                           className="text-sm text-gray-600 leading-relaxed ml-4 mb-2 list-disc"
                         >
-                          {line.replace("- ", "")}
+                          {renderInline(line.replace("- ", ""))}
                         </li>
                       );
                     }
@@ -131,7 +172,7 @@ export default function BlogPostContent({ post, content }: BlogPostContentProps)
                         key={j}
                         className="text-base text-gray-600 leading-relaxed mb-4"
                       >
-                        {line}
+                        {renderInline(line)}
                       </p>
                     );
                   })}
@@ -140,18 +181,38 @@ export default function BlogPostContent({ post, content }: BlogPostContentProps)
             })}
           </motion.div>
 
+          {/* Related reading */}
+          {related.length > 0 && (
+            <div className="mt-14 rounded-2xl border border-violet-100/60 bg-violet-50/30 p-6">
+              <h2 className="text-lg font-bold text-foreground mb-3">Related reading</h2>
+              <ul className="space-y-2 text-base text-gray-700">
+                {related.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-16 rounded-2xl border border-primary/15 bg-blue-50 p-8 text-center"
+            className="mt-10 rounded-2xl border border-primary/15 bg-blue-50 p-8 text-center"
           >
             <h3 className="text-xl font-bold text-foreground mb-3">
               Ready to Start Streaming?
             </h3>
             <p className="text-muted mb-6">
-              Get started with cheap-iptv.tv today. Plans from £25.99 for three months with a 30-day money-back guarantee.
+              Get started with Cheap IPTV today — plans from £25.99 (about £3.33/month on the
+              two-year plan), every one backed by a 30-day money-back guarantee.
             </p>
             <SectionLink
               href="/#pricing"

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | Cheap IPTV",
   },
   description:
-    "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. The best-value IPTV subscription in Britain. £3.33.",
+    "Cheap IPTV UK done right — 37,000 channels, 4K UHD, built-in VPN, five screens and a 30-day money-back guarantee. Buy the best-value cheap IPTV subscription in Britain from £3.33/month. Instant activation.",
   keywords: [
     "cheap iptv",
     "cheap iptv subscription",

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Tv, Trophy, Film, Baby, Newspaper, Globe } from "lucide-react";
+import { Tv, Trophy, Film, Baby, Newspaper, Globe, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import SectionLink from "./SectionLink";
 import { CHANNEL_CATEGORIES } from "@/lib/constants";
 
@@ -68,6 +69,15 @@ export default function ChannelsSection() {
           })}
         </div>
 
+        <div className="mt-10 text-center">
+          <Link
+            href="/iptv-channels"
+            className="inline-flex items-center gap-2 text-base font-semibold text-violet-600 transition-colors hover:text-violet-700"
+          >
+            View the full IPTV channel list
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );

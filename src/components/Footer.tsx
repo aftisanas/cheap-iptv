@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MapPin } from "lucide-react";
-import { NAV_LINKS, GUIDE_LINKS, LEGAL_LINKS, SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
+import { NAV_LINKS, LEGAL_LINKS, SITE_NAME, CONTACT_EMAIL } from "@/lib/constants";
 import SectionLink from "@/components/SectionLink";
 
 export default function Footer() {
@@ -18,7 +18,7 @@ export default function Footer() {
               <div className="relative h-12 w-12 shrink-0">
                 <Image
                   src="/cheap-iptv.webp"
-                  alt="Cheap IPTV logo"
+                  alt="Cheap IPTV UK — cheap IPTV subscription logo"
                   fill
                   sizes="48px"
                   loading="lazy"
@@ -63,28 +63,42 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Guides */}
+          {/* Plans */}
           <div>
             <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Plans &amp; Guides
+              Plans
             </h3>
             <ul className="space-y-3">
-              {GUIDE_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted transition-colors hover:text-violet-600"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
               <li>
                 <Link
-                  href="/contact"
+                  href="/iptv-service-provider"
                   className="text-sm text-muted transition-colors hover:text-violet-600"
                 >
-                  Contact
+                  IPTV Service Provider
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/cheapest-iptv"
+                  className="text-sm text-muted transition-colors hover:text-violet-600"
+                >
+                  Cheapest IPTV
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/iptv-subscription"
+                  className="text-sm text-muted transition-colors hover:text-violet-600"
+                >
+                  IPTV Subscription
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/iptv-channels"
+                  className="text-sm text-muted transition-colors hover:text-violet-600"
+                >
+                  IPTV Channel List
                 </Link>
               </li>
             </ul>

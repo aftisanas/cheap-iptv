@@ -1,45 +1,38 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 
-/**
- * AI crawlers we explicitly allow. These were previously hand-edited onto the
- * deployed robots.txt only — keeping them here means a rebuild can't silently
- * drop them.
- */
-const LLM_USER_AGENTS = [
-  "GPTBot",
-  "OAI-SearchBot",
-  "ChatGPT-User",
-  "ClaudeBot",
-  "Claude-Web",
-  "anthropic-ai",
-  "PerplexityBot",
-  "Perplexity-User",
-  "Google-Extended",
-  "Applebot-Extended",
-  "CCBot",
-];
-
-const DISALLOWED_PATHS = ["/api/", "/_next/", "/admin/"];
-
 export default function robots(): MetadataRoute.Robots {
+  // Explicitly welcome the major AI answer-engine crawlers so the brand is
+  // eligible to be cited in ChatGPT, Claude, Perplexity, Google AI Overviews
+  // and Bing/Copilot. They can also read /llms.txt.
+  const aiCrawlers = [
+    "GPTBot",
+    "OAI-SearchBot",
+    "ChatGPT-User",
+    "ClaudeBot",
+    "Claude-Web",
+    "anthropic-ai",
+    "PerplexityBot",
+    "Perplexity-User",
+    "Google-Extended",
+    "Applebot-Extended",
+    "Bingbot",
+    "CCBot",
+  ];
+
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: DISALLOWED_PATHS,
+        // Only block server/admin routes. /_next/ is intentionally NOT blocked:
+        // Googlebot must fetch the JS/CSS there to render and evaluate pages.
+        disallow: ["/api/", "/admin/"],
       },
       {
-        userAgent: ["Googlebot", "Bingbot"],
+        userAgent: aiCrawlers,
         allow: "/",
-        disallow: DISALLOWED_PATHS,
       },
-      ...LLM_USER_AGENTS.map((userAgent) => ({
-        userAgent,
-        allow: "/",
-        disallow: DISALLOWED_PATHS,
-      })),
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
     host: SITE_URL,

@@ -7,6 +7,7 @@ import ChannelsSection from "@/components/ChannelsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import TrustSection from "@/components/TrustSection";
+import InternalLinksSection from "@/components/InternalLinksSection";
 import CTASection from "@/components/CTASection";
 import {
   CONTACT_EMAIL,
@@ -15,7 +16,6 @@ import {
   PRICING_PLANS,
   SITE_NAME,
   SITE_URL,
-  TESTIMONIALS,
 } from "@/lib/constants";
 
 export default function HomePage() {
@@ -23,17 +23,8 @@ export default function HomePage() {
   const websiteId = `${SITE_URL}/#website`;
   const webpageId = `${SITE_URL}/#webpage`;
   const productId = `${SITE_URL}/#product`;
-  const serviceId = `${SITE_URL}/#service`;
   const logoUrl = LOGO_URL;
-
-  // Ratings are derived from the testimonials actually rendered on this page,
-  // so the aggregate stays substantiated per Google's Product policy.
-  const reviewCount = TESTIMONIALS.length;
-  const ratingValue = (
-    TESTIMONIALS.reduce((sum, t) => sum + t.rating, 0) / reviewCount
-  ).toFixed(1);
-
-  // Rolling one-year-forward validity for offer prices.
+  // Offers stay valid for a year from build; refreshed on every deploy.
   const priceValidUntil = `${new Date().getFullYear() + 1}-12-31`;
 
   return (
@@ -47,6 +38,7 @@ export default function HomePage() {
       <TestimonialsSection />
       <FAQSection />
       <TrustSection />
+      <InternalLinksSection />
       <CTASection />
 
       {/* JSON-LD Structured Data */}
@@ -124,49 +116,15 @@ export default function HomePage() {
               availability: "https://schema.org/InStock",
               itemCondition: "https://schema.org/NewCondition",
               url: `${SITE_URL}/#pricing`,
-            })),
-            review: TESTIMONIALS.map((testimonial) => ({
-              "@type": "Review",
-              author: { "@type": "Person", name: testimonial.name },
-              reviewRating: {
-                "@type": "Rating",
-                ratingValue: String(testimonial.rating),
-                bestRating: "5",
+              hasMerchantReturnPolicy: {
+                "@type": "MerchantReturnPolicy",
+                applicableCountry: "GB",
+                returnPolicyCategory:
+                  "https://schema.org/MerchantReturnFiniteReturnWindow",
+                merchantReturnDays: 30,
+                returnMethod: "https://schema.org/ReturnByMail",
+                returnFees: "https://schema.org/FreeReturn",
               },
-              reviewBody: testimonial.text,
-            })),
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue,
-              reviewCount: String(reviewCount),
-              bestRating: "5",
-            },
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            "@id": serviceId,
-            name: `${SITE_NAME} Subscription`,
-            serviceType: "IPTV subscription",
-            url: SITE_URL,
-            image: [logoUrl],
-            areaServed: { "@type": "Country", name: "GB" },
-            provider: { "@id": organizationId },
-            description:
-              "IPTV streaming subscription for UK households — 37,000+ live channels, 198,000+ on-demand titles, 4K UHD, five simultaneous screens and a built-in VPN.",
-            offers: PRICING_PLANS.map((plan) => ({
-              "@type": "Offer",
-              name: `${plan.name} Plan`,
-              price: plan.price.toFixed(2),
-              priceCurrency: "GBP",
-              priceValidUntil,
-              availability: "https://schema.org/InStock",
-              url: `${SITE_URL}/#pricing`,
             })),
           }),
         }}

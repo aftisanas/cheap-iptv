@@ -280,3 +280,29 @@ body {
   animation: shimmer 3s linear infinite;
   background-size: 200% 100%;
 }
+
+/* Respect users who prefer reduced motion — disables the continuous
+   aurora/float/shimmer/glow loops that otherwise run on the main thread,
+   improving INP and battery on mid-range devices. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .aurora-blob,
+  .promo-banner,
+  .promo-banner-shimmer,
+  .badge-shimmer::after,
+  .gradient-text-hero {
+    animation: none !important;
+  }
+}

@@ -4,24 +4,15 @@ import { ChevronDown, MessageCircle, Play, ShieldCheck } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import TrustSection from "@/components/TrustSection";
 import SectionLink from "@/components/SectionLink";
-import {
-  buildBreadcrumbLd,
-  CONTACT_EMAIL,
-  LOGO_URL,
-  PRICING_PLANS,
-  SITE_NAME,
-  SITE_URL,
-  WHATSAPP_URL,
-} from "@/lib/constants";
+import { CONTACT_EMAIL, LOGO_URL, PRICING_PLANS, SITE_NAME, SITE_URL, WHATSAPP_URL } from "@/lib/constants";
 
 const PAGE_PATH = "/iptv-service-provider";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
-const BREADCRUMB_NAME = "IPTV Service Provider";
-const LAST_UPDATED_DISPLAY = "26 May 2026";
-const LAST_UPDATED_ISO = "2026-05-26";
+const LAST_UPDATED_DISPLAY = "29 June 2026";
+const LAST_UPDATED_ISO = "2026-06-29";
 
 const META_TITLE =
-  "IPTV Service Provider UK | Reliable Streams, Real Support — cheap-iptv.tv";
+  "IPTV Service Provider UK | Reliable Streams, Real Support";
 const META_DESCRIPTION =
   "A UK IPTV service provider with real human support, stable streaming and transparent pricing. See how we operate and what we promise.";
 
@@ -178,7 +169,7 @@ export default function IPTVServiceProviderPage() {
               href="/"
               className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
             >
-              homepage
+              cheap IPTV UK homepage
             </Link>
             . This page explains who runs the service, how the streaming side
             is engineered, what happens when something goes wrong, and how
@@ -415,6 +406,32 @@ export default function IPTVServiceProviderPage() {
         </div>
       </article>
 
+      {/* Related reading — internal links into the blog cluster */}
+      <section className="bg-white pb-12 lg:pb-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-violet-100/60 bg-violet-50/30 p-6">
+            <h2 className="text-lg font-bold text-foreground mb-3">Related reading</h2>
+            <ul className="space-y-2 text-base text-gray-700">
+              <li>
+                <Link href="/cheapest-iptv" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  Compare the cheapest IPTV plans side by side
+                </Link>
+              </li>
+              <li>
+                <Link href="/iptv-channels" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  See the full IPTV channel list and categories
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/iptv-vs-traditional-tv" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  Cheap IPTV vs traditional UK TV packages
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Trust pillars — reused from existing TrustSection */}
       <TrustSection />
 
@@ -504,6 +521,13 @@ export default function IPTVServiceProviderPage() {
                 about: { "@id": organizationId },
                 dateModified: LAST_UPDATED_ISO,
               },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+                  { "@type": "ListItem", position: 2, name: "IPTV Service Provider", item: PAGE_URL },
+                ],
+              },
             ],
           }),
         }}
@@ -525,16 +549,6 @@ export default function IPTVServiceProviderPage() {
               },
             })),
           }),
-        }}
-      />
-
-      {/* JSON-LD: BreadcrumbList */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            buildBreadcrumbLd([{ name: BREADCRUMB_NAME, path: PAGE_PATH }])
-          ),
         }}
       />
     </>

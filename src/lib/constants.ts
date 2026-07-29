@@ -1,46 +1,22 @@
 export const SITE_NAME = "Cheap IPTV";
 export const SITE_URL = "https://cheap-iptv.tv";
-export const CONTACT_EMAIL = "contact@buy-iptv-uk.com";
+export const CONTACT_EMAIL = "contact@cheap-iptv.tv";
 
-/** Single source of truth for the Organization / Article publisher logo. */
-export const LOGO_PATH = "/cheap-iptv.webp";
-export const LOGO_URL = `${SITE_URL}${LOGO_PATH}`;
+// Single source of truth for the brand logo used in structured data.
+// Must point at a real file in /public (verified: /cheap-iptv.webp exists).
+export const LOGO_URL = `${SITE_URL}/cheap-iptv.webp`;
 
-/**
- * BreadcrumbList JSON-LD. Pass the trail after Home, e.g.
- * `[{ name: "Blog", path: "/blog" }, { name: post.title, path: `/blog/${slug}` }]`.
- */
-export function buildBreadcrumbLd(trail: { name: string; path: string }[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [{ name: "Home", path: "/" }, ...trail].map(
-      (crumb, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        name: crumb.name,
-        item: `${SITE_URL}${crumb.path}`,
-      })
-    ),
-  };
-}
+// Named editorial author for E-E-A-T / Article authorship signals.
+export const AUTHOR = {
+  name: "Cheap IPTV Editorial Team",
+  url: `${SITE_URL}/contact`,
+} as const;
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Why Us", href: "/#features" },
   { label: "Pricing", href: "/#pricing" },
   { label: "FAQ", href: "/#faq" },
-] as const;
-
-/**
- * Crawlable cluster pages. Rendered in the footer so the homepage still passes
- * them link equity (they were previously orphaned) without crowding the navbar.
- */
-export const GUIDE_LINKS = [
-  { label: "Cheapest IPTV", href: "/cheapest-iptv" },
-  { label: "IPTV Subscription", href: "/iptv-subscription" },
-  { label: "IPTV Provider", href: "/iptv-service-provider" },
-  { label: "Blog", href: "/blog" },
 ] as const;
 
 export const LEGAL_LINKS = [
@@ -65,7 +41,7 @@ export const FEATURES = [
     icon: "Tv" as const,
   },
   {
-    title: "Premium Streaming Quality In Native 4K UHD",
+    title: "Premium-Grade IPTV Quality In Native 4K UHD",
     description:
       "Every plan streams in native 4K when the broadcaster supports it. Adaptive bitrate keeps the picture rock-steady when broadband fluctuates — premium visuals at a fraction of the premium price tag.",
     icon: "Monitor" as const,
@@ -128,7 +104,7 @@ export const PRICING_PLANS = [
       "198,000+ films, series and documentaries on demand",
       "Full EPG with 7-day catch-up TV",
       "HD, Full HD and 4K UHD streaming",
-      "Five simultaneous screens on one account",
+      "Support all devices",
       "24/7 dedicated UK support",
       "Built-in VPN included at no extra cost",
       "30-day money-back guarantee",
@@ -144,7 +120,7 @@ export const PRICING_PLANS = [
     subtitle: "Six months of premium streaming at a budget price",
     price: 35.99,
     originalPrice: 69.99,
-    perMonth: 6.00,
+    perMonth: 6.0,
     period: "6 months",
     devices: 5,
     extraConnectionPrice: 9.50,
@@ -156,7 +132,7 @@ export const PRICING_PLANS = [
       "198,000+ films, series and documentaries on demand",
       "Full EPG with 7-day catch-up TV",
       "HD, Full HD and 4K UHD streaming",
-      "Five simultaneous screens on one account",
+      "Support all devices",
       "24/7 dedicated UK support",
       "Built-in VPN included at no extra cost",
       "30-day money-back guarantee",
@@ -184,7 +160,7 @@ export const PRICING_PLANS = [
       "198,000+ films, series and documentaries on demand",
       "Full EPG with 7-day catch-up TV",
       "HD, Full HD and 4K UHD streaming",
-      "Five simultaneous screens on one account",
+      "Support all devices",
       "24/7 dedicated UK support",
       "Built-in VPN included at no extra cost",
       "30-day money-back guarantee",
@@ -212,7 +188,7 @@ export const PRICING_PLANS = [
       "198,000+ films, series and documentaries on demand",
       "Full EPG with 7-day catch-up TV",
       "HD, Full HD and 4K UHD streaming",
-      "Five simultaneous screens on one account",
+      "Support all devices",
       "24/7 dedicated UK support",
       "Built-in VPN included at no extra cost",
       "30-day money-back guarantee",
@@ -297,7 +273,7 @@ export const FAQ_ITEMS = [
   {
     question: "How much does the cheapest plan cost?",
     answer:
-      "The entry price works out to eight pounds sixty-six per month on the three-month plan. Longer commitments reduce the per-month cost further — the 24-month plan lands at three pounds thirty-three per month, a 60 percent saving against its standard price.",
+      "The three-month Bronze plan is £25.99 in total, which works out to about £8.66 per month. Longer commitments lower the per-month cost further — the 24-month Diamond plan drops to £3.33 per month, the cheapest published rate, saving 60 percent against short-term equivalents.",
   },
   {
     question: "Is there a hidden fee for 4K or VPN?",
@@ -338,6 +314,16 @@ export const FAQ_ITEMS = [
     question: "Why choose cheap-iptv.tv over other IPTV providers?",
     answer:
       "37,000 channels, 198,000 films, 4K UHD, VPN, five screens, 60-second activation and 24/7 UK support — all from a single low monthly rate. No other IPTV provider in Britain matches this combination at this price point.",
+  },
+  {
+    question: "Is this the best cheap IPTV UK service?",
+    answer:
+      "It is built to be. A best cheap IPTV UK service has to win on more than price: 37,000+ channels with full UK coverage, native 4K UHD, a built-in VPN, five simultaneous screens, instant activation and a genuine 30-day money-back guarantee — all included on every plan, backed by a named British support team. Cheap-iptv.tv pairs the lowest published prices with that complete feature set, which is what makes it one of the best-value cheap IPTV UK options available.",
+  },
+  {
+    question: "How do I buy a cheap IPTV subscription?",
+    answer:
+      "Choose a plan in the pricing section, complete a one-time payment by card or PayPal, and your login arrives by email within about sixty seconds. There is no contract and no stored card — the cheap IPTV subscription runs for its fixed term and simply expires unless you renew. Every plan is covered by the 30-day money-back guarantee, so you can buy and test it risk-free.",
   },
 ] as const;
 
@@ -393,8 +379,7 @@ export const BLOG_POSTS = [
     excerpt:
       "Finding the best IPTV service in the UK means looking beyond flashy promises. This guide breaks down the 7 criteria that matter most for British viewers — from channel quality and reliability to support and genuine value.",
     date: "2026-04-01",
-    updated: "2026-07-28",
-    readTime: "11 min read",
+    readTime: "12 min read",
     category: "Guide",
   },
   {
@@ -403,8 +388,7 @@ export const BLOG_POSTS = [
     excerpt:
       "A complete, beginner-friendly guide to installing and configuring IPTV on an Amazon Fire Stick. Stream in under 10 minutes using the step-by-step instructions below.",
     date: "2026-03-20",
-    updated: "2026-07-28",
-    readTime: "10 min read",
+    readTime: "6 min read",
     category: "Tutorial",
   },
   {
@@ -413,19 +397,17 @@ export const BLOG_POSTS = [
     excerpt:
       "An honest comparison of cheap IPTV and traditional UK TV packages. Costs, channel availability, picture quality, flexibility and value — everything needed to decide.",
     date: "2026-03-15",
-    updated: "2026-07-28",
-    readTime: "10 min read",
+    readTime: "8 min read",
     category: "Comparison",
   },
   {
-    slug: "live-uk-sports-streaming-guide",
-    title: "Watch Live UK Sports — Cheap IPTV Streaming Guide",
+    slug: "cheap-iptv-subscription-uk-guide",
+    title: "Cheap IPTV Subscription UK — Plans, Pricing & What's Included In 2026",
     excerpt:
-      "Top-tier UK football, domestic cup ties, European nights and combat sports — all covered in stunning HD and 4K quality through a cheap IPTV subscription.",
-    date: "2026-03-10",
-    updated: "2026-07-28",
+      "A plain-English guide to choosing a cheap IPTV subscription in the UK: how the plans work, what every plan includes, how to judge value, and how to start in minutes.",
+    date: "2026-06-29",
     readTime: "9 min read",
-    category: "Sports",
+    category: "Guide",
   },
 ] as const;
 

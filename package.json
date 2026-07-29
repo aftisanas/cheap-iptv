@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p 3002",
-    "lint": "eslint"
+    "lint": "eslint",
+    "indexnow": "node scripts/indexnow-submit.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

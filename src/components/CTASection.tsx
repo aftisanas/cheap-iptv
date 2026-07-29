@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Play, MessageCircle, Sparkles } from "lucide-react";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
-import { WHATSAPP_URL } from "@/lib/constants";
+import { CONTACT_EMAIL, WHATSAPP_URL } from "@/lib/constants";
 
 export default function CTASection() {
   return (
@@ -96,7 +96,7 @@ export default function CTASection() {
           </div>
 
           <p className="mt-8 text-sm text-gray-400">
-            Questions? Email contact@buy-iptv-uk.com — average reply under four minutes.
+            Questions? Email {CONTACT_EMAIL} — average reply under four minutes.
           </p>
         </motion.div>
       </div>

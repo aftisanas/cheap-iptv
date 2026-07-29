@@ -4,22 +4,14 @@ import { ChevronDown, MessageCircle, Play, CalendarClock } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import TrustSection from "@/components/TrustSection";
 import SectionLink from "@/components/SectionLink";
-import {
-  buildBreadcrumbLd,
-  CONTACT_EMAIL,
-  LOGO_URL,
-  PRICING_PLANS,
-  SITE_NAME,
-  SITE_URL,
-} from "@/lib/constants";
+import { CONTACT_EMAIL, LOGO_URL, PRICING_PLANS, SITE_NAME, SITE_URL } from "@/lib/constants";
 
 const PAGE_PATH = "/iptv-subscription";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
-const BREADCRUMB_NAME = "IPTV Subscription";
-const LAST_UPDATED_DISPLAY = "26 May 2026";
-const LAST_UPDATED_ISO = "2026-05-26";
+const LAST_UPDATED_DISPLAY = "29 June 2026";
+const LAST_UPDATED_ISO = "2026-06-29";
 
-const META_TITLE = "IPTV Subscription UK | Flexible Monthly & Yearly Plans — cheap-iptv.tv";
+const META_TITLE = "IPTV Subscription UK | Flexible Monthly & Yearly Plans";
 const META_DESCRIPTION =
   "Pick the IPTV subscription that suits you — pay quarterly with no contract, or save with an annual plan. UK live channels, films and on-demand library included.";
 
@@ -170,8 +162,15 @@ export default function IPTVSubscriptionPage() {
             longer the term, the lower the per-month rate, but every plan ships with an identical
             feature set. This page lays out the four options, explains how the one-time billing
             model works in practice and shows exactly how to stop the subscription when you want
-            to — there is nothing to cancel because nothing rebills automatically. If you would
-            rather read the operational background first, the{" "}
+            to — there is nothing to cancel because nothing rebills automatically. To see the full
+            feature set and pricing, visit the{" "}
+            <Link
+              href="/"
+              className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
+            >
+              cheap IPTV UK homepage
+            </Link>
+            ; or, if you would rather read the operational background first, the{" "}
             <Link
               href="/iptv-service-provider"
               className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
@@ -390,6 +389,32 @@ export default function IPTVSubscriptionPage() {
         </div>
       </article>
 
+      {/* Related reading — internal links into the blog cluster */}
+      <section className="bg-white pb-12 lg:pb-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-violet-100/60 bg-violet-50/30 p-6">
+            <h2 className="text-lg font-bold text-foreground mb-3">Related reading</h2>
+            <ul className="space-y-2 text-base text-gray-700">
+              <li>
+                <Link href="/cheapest-iptv" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  See the cheapest IPTV rate, priced line by line
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/best-iptv-uk-guide-2026" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  Best IPTV UK 2026 — how to choose a provider
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/how-to-setup-iptv-firestick" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  How to set up your IPTV subscription on a Fire Stick
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Trust pillars — reused from existing TrustSection */}
       <TrustSection />
 
@@ -475,6 +500,13 @@ export default function IPTVSubscriptionPage() {
                 about: { "@id": organizationId },
                 dateModified: LAST_UPDATED_ISO,
               },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+                  { "@type": "ListItem", position: 2, name: "IPTV Subscription", item: PAGE_URL },
+                ],
+              },
             ],
           }),
         }}
@@ -493,16 +525,6 @@ export default function IPTVSubscriptionPage() {
               acceptedAnswer: { "@type": "Answer", text: item.answer },
             })),
           }),
-        }}
-      />
-
-      {/* JSON-LD: BreadcrumbList */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            buildBreadcrumbLd([{ name: BREADCRUMB_NAME, path: PAGE_PATH }])
-          ),
         }}
       />
     </>

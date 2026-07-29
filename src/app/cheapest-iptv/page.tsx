@@ -4,22 +4,14 @@ import { ChevronDown, MessageCircle, Play, Tags } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import TrustSection from "@/components/TrustSection";
 import SectionLink from "@/components/SectionLink";
-import {
-  buildBreadcrumbLd,
-  CONTACT_EMAIL,
-  LOGO_URL,
-  PRICING_PLANS,
-  SITE_NAME,
-  SITE_URL,
-} from "@/lib/constants";
+import { CONTACT_EMAIL, LOGO_URL, PRICING_PLANS, SITE_NAME, SITE_URL } from "@/lib/constants";
 
 const PAGE_PATH = "/cheapest-iptv";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
-const BREADCRUMB_NAME = "Cheapest IPTV";
-const LAST_UPDATED_DISPLAY = "26 May 2026";
-const LAST_UPDATED_ISO = "2026-05-26";
+const LAST_UPDATED_DISPLAY = "29 June 2026";
+const LAST_UPDATED_ISO = "2026-06-29";
 
-const META_TITLE = "Cheapest IPTV UK 2026 | Monthly & Annual Plans — cheap-iptv.tv";
+const META_TITLE = "Cheapest IPTV UK 2026 | Monthly & Annual Plans From £3.33/mo";
 const META_DESCRIPTION =
   "Looking for the cheapest IPTV in the UK? Compare our monthly, quarterly and annual plans — same channels, same quality, lowest published price. Cancel anytime.";
 
@@ -168,7 +160,14 @@ export default function CheapestIPTVPage() {
             discounted-then-rebilled tiers, no separate sport bundles and no VPN sold on the side.
             This page walks through the four plans line by line, explains exactly what stays
             included at the low price and sets out the refund window that makes trying the service
-            risk-free. If you want the operational backdrop — who runs the service and how it is
+            risk-free. For the full feature set and to buy, head to the{" "}
+            <Link
+              href="/"
+              className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
+            >
+              cheap IPTV UK homepage
+            </Link>
+            ; if you want the operational backdrop — who runs the service and how it is
             engineered — that lives on the{" "}
             <Link
               href="/iptv-service-provider"
@@ -376,6 +375,32 @@ export default function CheapestIPTVPage() {
         </div>
       </article>
 
+      {/* Related reading — internal links into the blog cluster */}
+      <section className="bg-white pb-12 lg:pb-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-violet-100/60 bg-violet-50/30 p-6">
+            <h2 className="text-lg font-bold text-foreground mb-3">Related reading</h2>
+            <ul className="space-y-2 text-base text-gray-700">
+              <li>
+                <Link href="/blog/best-iptv-uk-guide-2026" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  Best IPTV UK 2026 — how to choose a cheap IPTV provider
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/iptv-vs-traditional-tv" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  Cheap IPTV vs traditional UK TV packages — which is better value?
+                </Link>
+              </li>
+              <li>
+                <Link href="/iptv-subscription" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  Compare flexible IPTV subscription terms
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Trust pillars — reused from existing TrustSection */}
       <TrustSection />
 
@@ -461,6 +486,13 @@ export default function CheapestIPTVPage() {
                 about: { "@id": organizationId },
                 dateModified: LAST_UPDATED_ISO,
               },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+                  { "@type": "ListItem", position: 2, name: "Cheapest IPTV UK", item: PAGE_URL },
+                ],
+              },
             ],
           }),
         }}
@@ -479,16 +511,6 @@ export default function CheapestIPTVPage() {
               acceptedAnswer: { "@type": "Answer", text: item.answer },
             })),
           }),
-        }}
-      />
-
-      {/* JSON-LD: BreadcrumbList */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            buildBreadcrumbLd([{ name: BREADCRUMB_NAME, path: PAGE_PATH }])
-          ),
         }}
       />
     </>

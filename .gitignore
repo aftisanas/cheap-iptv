@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# internal SEO planning / audit docs and data exports (keep out of the repo)
+/ACTION-PLAN.md
+/FULL-AUDIT-REPORT.md
+*.csv
+*.zip

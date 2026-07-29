@@ -19,7 +19,7 @@ const trustItems = [
   },
   {
     icon: Lock,
-    title: "Built-In VPN — Premium Streaming Privacy Included Free",
+    title: "Built-In VPN — Premium Privacy Included Free",
     description:
       "The VPN encrypts every stream with no latency penalty and no bandwidth cap. No logs, no separate app, no add-on fee — privacy at the same quality level as services charging three times more.",
   },

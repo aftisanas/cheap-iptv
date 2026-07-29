@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative h-[104vh] min-h-[640px] flex flex-col overflow-hidden"
+      className="relative min-h-[100dvh] md:h-[104vh] md:min-h-[840px] flex flex-col overflow-hidden"
     >
       {/* ── Deep premium gradient background ── */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0a0118] via-[#1a0a3e] to-[#0c1445]" />
@@ -63,15 +63,18 @@ export default function HeroSection() {
 
       {/* ── Content ── */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-[7.5rem] lg:pt-32 pb-2 flex flex-col items-center text-center">
-        {/* Headline — 2 lines, matches reference sizing.
-            No entrance animation: this is the LCP element, and animating its
-            opacity from 0 delays the largest paint by the full transition. */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.1] mb-2">
+        {/* Headline — 2 lines, matches reference sizing */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.1] mb-2"
+        >
           <span className="text-white">Cheap IPTV — The Best-Value</span>
           <br />
           <span className="text-white">IPTV UK </span>
           <span className="gradient-text-hero">Subscription From £3.33</span>
-        </h1>
+        </motion.h1>
 
         {/* Subtitle */}
         <motion.p

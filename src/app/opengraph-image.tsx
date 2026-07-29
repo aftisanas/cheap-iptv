@@ -1,14 +1,11 @@
 import { ImageResponse } from "next/og";
 
-export const alt =
-  "Cheap IPTV UK — 37,000 channels, 4K UHD, built-in VPN, five screens";
+// Site-wide social share image (1200×630). Inherited by every route that does
+// not declare its own openGraph.images, so all pages get a branded preview.
+export const alt = "Cheap IPTV — Cheapest UK IPTV Service from £3.33";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/**
- * Generated at build time so the social card never depends on a binary asset
- * being present in /public. Applies to every route that doesn't define its own.
- */
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -18,10 +15,12 @@ export default function OpengraphImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
+          alignItems: "flex-start",
           justifyContent: "center",
           padding: "80px",
           background:
             "linear-gradient(135deg, #0a0118 0%, #1a0a3e 55%, #0c1445 100%)",
+          fontFamily: "sans-serif",
         }}
       >
         <div
@@ -29,70 +28,67 @@ export default function OpengraphImage() {
             display: "flex",
             alignItems: "center",
             gap: "16px",
+            color: "#c4b5fd",
             fontSize: 30,
-            fontWeight: 700,
+            fontWeight: 600,
+            letterSpacing: "1px",
+            marginBottom: "28px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              padding: "8px 22px",
+              borderRadius: "999px",
+              border: "1px solid rgba(196,181,253,0.35)",
+              background: "rgba(255,255,255,0.06)",
+            }}
+          >
+            cheap-iptv.tv
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            fontSize: 88,
+            fontWeight: 800,
+            color: "#ffffff",
+            lineHeight: 1.05,
+            letterSpacing: "-2px",
+          }}
+        >
+          Cheap IPTV UK
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            fontSize: 52,
+            fontWeight: 800,
             color: "#22d3ee",
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
+            lineHeight: 1.1,
+            marginTop: "8px",
+            letterSpacing: "-1px",
           }}
         >
-          cheap-iptv.tv
+          37,000 Channels in 4K — From £3.33/mo
         </div>
 
         <div
           style={{
             display: "flex",
-            marginTop: "28px",
-            fontSize: 76,
-            fontWeight: 800,
-            color: "#ffffff",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          Cheap IPTV UK — Maximum
-        </div>
-        <div
-          style={{
-            display: "flex",
-            fontSize: 76,
-            fontWeight: 800,
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            color: "#a78bfa",
-          }}
-        >
-          Streaming For Minimum Spend
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            marginTop: "36px",
             fontSize: 32,
-            color: "#cbd5e1",
+            color: "rgba(226,232,240,0.92)",
+            marginTop: "32px",
+            maxWidth: "940px",
+            lineHeight: 1.35,
           }}
         >
-          37,000 channels · 4K UHD · Built-in VPN · 5 screens
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            marginTop: "44px",
-            alignSelf: "flex-start",
-            padding: "16px 34px",
-            borderRadius: "9999px",
-            background: "linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%)",
-            fontSize: 30,
-            fontWeight: 700,
-            color: "#ffffff",
-          }}
-        >
-          30-day money-back guarantee
+          Best-value cheap IPTV subscription · built-in VPN · five screens · 30-day money-back guarantee
         </div>
       </div>
     ),
-    size
+    { ...size }
   );
 }

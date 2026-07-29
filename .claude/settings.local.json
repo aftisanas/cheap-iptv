@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//home/iptv-uk-4k/htdocs/iptv-uk-4k.com/**)",
+      "Bash(sudo -u iptv-uk-4k bash -lc 'source ~/.nvm/nvm.sh 2>/dev/null && nvm ls 2>&1 | tail -20 && echo \"NODE: $\\(node -v 2>/dev/null\\)\" && echo \"NPM: $\\(npm -v 2>/dev/null\\)\" && echo \"PM2: $\\(pm2 -v 2>/dev/null\\)\"')",
+      "Bash(sudo -u iptv-uk-4k bash -lc 'source ~/.nvm/nvm.sh && pm2 ls')",
+      "Bash(curl -sI -m 5 http://127.0.0.1:3007)",
+      "Bash(sudo -u iptv-uk-4k bash -lc 'cd ~/htdocs/iptv-uk-4k.com && git status -sb && echo \"---\" && git log -1 --oneline')",
+      "Bash(curl -skI -H \"Host: iptv-uk-4k.com\" http://127.0.0.1)",
+      "Bash(curl -sI https://iptv-uk-4k.com)",
+      "Bash(curl -sI https://www.iptv-uk-4k.com)",
+      "Bash(openssl s_client -servername iptv-uk-4k.com -connect iptv-uk-4k.com:443)",
+      "Bash(sudo -u iptv-uk-4k bash -lc 'cd ~/htdocs/iptv-uk-4k.com && git diff package.json')"
+    ]
+  }
+}
