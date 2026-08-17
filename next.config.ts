@@ -1,13 +1,12 @@
 import type { NextConfig } from "next";
 
-// Content-Security-Policy tuned for a prerendered Next.js site:
-// - 'unsafe-inline' on script-src is required because statically exported pages
-//   cannot use per-request nonces (Next's bootstrap + our inline JSON-LD).
-// - next/font self-hosts fonts and next/image serves from the same origin,
-//   so font-src/img-src 'self' is sufficient (data:/blob: kept for safety).
+// Content-Security-Policy tuned for a prerendered Next.js site.
+// React's dev runtime needs `unsafe-eval` for stack reconstruction and debug
+// tooling, but we keep it limited to development only so production stays strict.
+const isDevelopment = process.env.NODE_ENV !== "production";
 const ContentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
@@ -72,6 +71,22 @@ const nextConfig: NextConfig = {
       {
         source: '/blog/live-uk-sports-streaming-guide',
         destination: '/blog/best-iptv-uk-guide-2026',
+        permanent: true,
+      },
+      // Consolidate the "cheap iptv" parent topic onto the homepage.
+      // /cheapest-iptv was splitting signal with / and /iptv-subscription for the
+      // same intent; single canonical URL wins the cluster.
+      {
+        source: '/cheapest-iptv',
+        destination: '/',
+        permanent: true,
+      },
+      // "iptv service provider" is not a real query; the URL was earning no
+      // impressions. Repurposed into a cost/pricing hub targeting real search
+      // demand around IPTV cost, price and how-much-is-IPTV queries.
+      {
+        source: '/iptv-service-provider',
+        destination: '/how-much-does-iptv-cost-uk',
         permanent: true,
       },
     ];

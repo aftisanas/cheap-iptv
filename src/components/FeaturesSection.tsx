@@ -29,13 +29,13 @@ export default function FeaturesSection() {
             Budget Pricing, Premium Features
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Eight Reasons This Cheap IPTV Subscription{" "}
+            Eight Reasons This Affordable IPTV Subscription{" "}
             <span className="gradient-text">Outperforms Services Costing Three Times More</span>
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted">
-            Budget pricing does not mean budget quality. Every card below covers a feature that costs extra elsewhere — included here at no additional charge with every{" "}
+            Budget IPTV pricing does not mean budget quality. Every card below covers a feature that costs extra elsewhere — included here at no additional charge with every{" "}
             <SectionLink href="/#pricing" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
-              cheap IPTV subscription
+              low cost IPTV subscription
             </SectionLink>.
           </p>
         </motion.div>

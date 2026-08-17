@@ -3,16 +3,10 @@ import { ArrowRight } from "lucide-react";
 
 const LINKS = [
   {
-    href: "/cheapest-iptv",
-    title: "Cheapest IPTV UK",
-    description:
-      "Every plan priced line by line, from £25.99 down to about £3.33 per month on the two-year term.",
-  },
-  {
     href: "/iptv-subscription",
     title: "IPTV Subscription Plans",
     description:
-      "Quarterly, half-yearly, annual or two-year — pick the term that fits, with no contract and no stored card.",
+      "Compare 3, 6, 12 and 24-month terms side by side — no contract, no stored card, no auto-renewal.",
   },
   {
     href: "/iptv-channels",
@@ -21,10 +15,10 @@ const LINKS = [
       "37,000+ channels across UK entertainment, sport, films, kids, news and 40+ languages — every category included.",
   },
   {
-    href: "/iptv-service-provider",
-    title: "IPTV Service Provider",
+    href: "/how-much-does-iptv-cost-uk",
+    title: "How Much Does IPTV Cost In The UK?",
     description:
-      "Who runs cheap-iptv.tv, how the streams are engineered, and the real UK support behind every plan.",
+      "Full UK IPTV cost breakdown — per-month maths across every plan, cost vs pay-TV, and what actually drives the price.",
   },
 ];
 
@@ -34,15 +28,15 @@ export default function InternalLinksSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-3">
-            Explore Cheap IPTV
+            The Cheapest IPTV UK Cluster — Everything In One Place
           </h2>
           <p className="mx-auto max-w-2xl text-base text-muted leading-relaxed">
-            Everything you need to choose the right plan — pricing, subscription terms, how the
-            service is run, and step-by-step guides.
+            Everything you need to choose the right cheap IPTV plan — subscription terms, the full
+            channel list, and how the service is run behind the scenes.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {LINKS.map((link) => (
             <Link
               key={link.href}

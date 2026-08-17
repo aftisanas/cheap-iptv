@@ -10,7 +10,15 @@
       "Bash(curl -sI https://iptv-uk-4k.com)",
       "Bash(curl -sI https://www.iptv-uk-4k.com)",
       "Bash(openssl s_client -servername iptv-uk-4k.com -connect iptv-uk-4k.com:443)",
-      "Bash(sudo -u iptv-uk-4k bash -lc 'cd ~/htdocs/iptv-uk-4k.com && git diff package.json')"
+      "Bash(sudo -u iptv-uk-4k bash -lc 'cd ~/htdocs/iptv-uk-4k.com && git diff package.json')",
+      "WebFetch(domain:cheap-iptv.tv)",
+      "Bash(curl -sI \"https://cheap-iptv.tv/\")",
+      "Bash(curl -sI \"https://cheap-iptv.tv/iptv-channels\")",
+      "Bash(curl -s -o /dev/null -w \"homepage: %{http_code} | ttfb=%{time_starttransfer}s | total=%{time_total}s | size=%{size_download}B\\\\n\" \"https://cheap-iptv.tv/\")",
+      "Bash(curl -s -o /dev/null -w \"iptv-channels: %{http_code} | ttfb=%{time_starttransfer}s | total=%{time_total}s | size=%{size_download}B\\\\n\" \"https://cheap-iptv.tv/iptv-channels\")",
+      "Bash(curl -s -o /dev/null -w \"blog/best-guide: %{http_code} | ttfb=%{time_starttransfer}s | total=%{time_total}s | size=%{size_download}B\\\\n\" \"https://cheap-iptv.tv/blog/best-iptv-uk-guide-2026\")",
+      "Bash(curl -s -o /dev/null -w \"logo webp: %{http_code} | size=%{size_download}B | type=%{content_type}\\\\n\" \"https://cheap-iptv.tv/cheap-iptv.webp\")",
+      "Bash(node *)"
     ]
   }
 }

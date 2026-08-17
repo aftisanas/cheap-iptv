@@ -1,8 +1,31 @@
-export const SITE_NAME = "Cheap IPTV";
+﻿export const SITE_NAME = "Cheap IPTV";
 export const SITE_URL = "https://cheap-iptv.tv";
+export const SITE_SLUG = "iptv-uk-4k";
 // Live mailbox. Intentionally on buy-iptv-uk.com — there is no
 // contact@cheap-iptv.tv mailbox, so pointing at it would black-hole support mail.
 export const CONTACT_EMAIL = "contact@buy-iptv-uk.com";
+
+// Checkout mode: "whatsapp" shows the WhatsApp-only modal; "hub" routes to /checkout.
+export const CHECKOUT_MODE = (process.env.NEXT_PUBLIC_CHECKOUT_MODE ?? "whatsapp") as "whatsapp" | "hub";
+
+// Hub base URL — only used when CHECKOUT_MODE === "hub".
+export const CHECKOUT_HUB_URL =
+  process.env.NEXT_PUBLIC_CHECKOUT_HUB_URL ?? "https://checkout.british-iptv-4k.com";
+
+// Base (3-month) extra-connection rate. Longer terms scale this — each plan
+// carries its own `extraConnectionPrice` in PRICING_PLANS below.
+export const EXTRA_CONNECTION_PRICE = 7.25;
+export const EXTRA_CONNECTIONS_MAX = 5;
+
+export const CHECKOUT_COPY = {
+  buttonLabelPrefix: "Complete Order on WhatsApp",
+  buttonSubtitle: "Instant reply · payment details sent to you",
+  footerNote: "Secure checkout · 30-day money-back",
+  extraConnectionsLabel: "Extra Connections",
+  extraConnectionsHelp: "Watch on multiple devices simultaneously",
+  extraConnectionsPriceLabel: (price: number) =>
+    `+£${price.toFixed(2)} per extra connection`,
+} as const;
 
 // Single source of truth for the brand logo used in structured data.
 // Must point at a real file in /public (verified: /cheap-iptv.webp exists).
@@ -10,8 +33,13 @@ export const LOGO_URL = `${SITE_URL}/cheap-iptv.webp`;
 
 // Named editorial author for E-E-A-T / Article authorship signals.
 export const AUTHOR = {
-  name: "Cheap IPTV Editorial Team",
-  url: `${SITE_URL}/contact`,
+  name: "James Bennett",
+  slug: "james-bennett",
+  title: "Senior UK Streaming & IPTV Specialist",
+  url: `${SITE_URL}/authors/james-bennett`,
+  bio: "James Bennett is a British digital TV specialist with over 8 years of experience evaluating IPTV software, streaming protocols, home network configurations, and UK television standards.",
+  avatar: "/cheap-iptv.webp",
+  role: "Lead Editorial Writer",
 } as const;
 
 export const NAV_LINKS = [
@@ -265,17 +293,32 @@ export const FAQ_ITEMS = [
   {
     question: "Why is this IPTV subscription so cheap?",
     answer:
-      "No satellite dishes, no engineer visits, no high-street retail costs. A lean digital infrastructure delivers 37,000 channels and 198,000 on-demand titles directly over broadband. The savings pass straight to the subscriber.",
+      "No satellite dishes, no engineer visits, no high-street retail costs. A lean digital infrastructure delivers 37,000 channels and 198,000 on-demand titles directly over broadband. The savings pass straight to the subscriber — which is what makes this the most affordable IPTV subscription published in the UK today.",
   },
   {
     question: "Does cheap IPTV mean poor quality?",
     answer:
-      "Absolutely not. Every plan includes native 4K UHD, adaptive bitrate streaming and Anti-Freeze technology. Picture quality matches or exceeds satellite. Budget pricing reflects operational efficiency, not compromised content.",
+      "Absolutely not. Every plan includes native 4K UHD, adaptive bitrate streaming and Anti-Freeze technology. Picture quality matches or exceeds satellite. Budget IPTV pricing here reflects operational efficiency, not compromised content — the low cost sits on the term length, never on features.",
   },
   {
     question: "How much does the cheapest plan cost?",
     answer:
       "The three-month Bronze plan is £25.99 in total, which works out to about £8.66 per month. Longer commitments lower the per-month cost further — the 24-month Diamond plan drops to £3.33 per month, the cheapest published rate, saving 60 percent against short-term equivalents.",
+  },
+  {
+    question: "Is the cheapest IPTV plan also the best plan for me?",
+    answer:
+      "Not always. The lowest per-month price — £3.33 on the two-year Diamond plan — comes from the longest commitment, which suits households that already know they want the service for two years. For a first-time IPTV subscriber, the three-month Bronze plan is the rational starting point: the per-month rate is higher, but the total amount exposed is lower, and the 30-day refund window covers the first month regardless.",
+  },
+  {
+    question: "Is the price locked for the full subscription term?",
+    answer:
+      "Yes. The price paid at sign-up covers the entire plan length — three, six, twelve or twenty-four months. Whatever happens to the published rates during your active term, the rate you locked in is the rate that applies. There is also no automatic renewal at the end of the term, so no surprise charge to forget about — if you choose to renew later, you renew at whatever the published price is on that day.",
+  },
+  {
+    question: "How does the 30-day refund actually work if I want to claim it?",
+    answer:
+      "Open live chat or send a WhatsApp message inside the first thirty days, say you want a refund, and the original card or PayPal account is credited the same working day. No form to fill in, no proof required, no retention call. The 30-day window applies equally on every plan — Bronze through Diamond — because the guarantee is unconditional inside the window.",
   },
   {
     question: "Is there a hidden fee for 4K or VPN?",
@@ -305,7 +348,7 @@ export const FAQ_ITEMS = [
   {
     question: "How does this compare to traditional pay-TV?",
     answer:
-      "A premium pay-TV bundle with sports and cinema costs roughly seventy-five pounds per month on a 24-month contract. This cheap IPTV subscription delivers 37,000 channels from £3.33/month with no lock-in. More content, lower price, greater flexibility.",
+      "A premium pay-TV bundle with sports and cinema costs roughly seventy-five pounds per month on a 24-month contract. This low cost IPTV subscription delivers 37,000 channels from £3.33/month with no lock-in — a genuinely affordable IPTV alternative that carries more content, a lower price and greater flexibility.",
   },
   {
     question: "Is a separate VPN required?",
@@ -325,7 +368,7 @@ export const FAQ_ITEMS = [
   {
     question: "How do I buy a cheap IPTV subscription?",
     answer:
-      "Choose a plan in the pricing section, complete a one-time payment by card or PayPal, and your login arrives by email within about sixty seconds. There is no contract and no stored card — the cheap IPTV subscription runs for its fixed term and simply expires unless you renew. Every plan is covered by the 30-day money-back guarantee, so you can buy and test it risk-free.",
+      "Choose a plan in the pricing section, complete a one-time payment by card or PayPal, and your login arrives by email within about sixty seconds. There is no contract and no stored card — the budget IPTV subscription runs for its fixed term and simply expires unless you renew. Every plan is covered by the 30-day money-back guarantee, so you can buy and test this affordable IPTV service risk-free.",
   },
 ] as const;
 
@@ -376,7 +419,78 @@ export const CHANNEL_CATEGORIES = [
 
 export const BLOG_POSTS = [
   {
+    slug: "iptv-not-working-fixes",
+    heroImage: "/images/blog/iptv-not-working-fixes.webp",
+    title: "IPTV Not Working? The Full UK Troubleshooting Guide",
+    excerpt:
+      "A plain-English UK troubleshooting guide for when your IPTV stops working — buffering, dead channels, blank EPG, login errors, max-connections warnings and every other common problem, with a fix for each in under five minutes.",
+    date: "2026-08-16",
+    readTime: "12 min read",
+    category: "Guide",
+  },
+  {
+    slug: "m3u-xtream-codes-explained",
+    heroImage: "/images/blog/m3u-xtream-codes-explained.webp",
+    title: "M3U vs Xtream Codes — What They Are And Which To Use",
+    excerpt:
+      "A plain-English UK guide to M3U URLs and Xtream Codes — what each format actually is, how they differ, which apps support which, and how to load either one into the main IPTV players in under a minute.",
+    date: "2026-08-16",
+    readTime: "12 min read",
+    category: "Guide",
+  },
+  {
+    slug: "what-is-iptv-uk-guide",
+    heroImage: "/images/blog/what-is-iptv-uk-guide.webp",
+    title: "What Is IPTV? A Plain-English UK Guide For 2026",
+    excerpt:
+      "A plain-English UK guide to IPTV — what it actually is, how it works, how it differs from cable, satellite and Freeview, what it costs, what devices it runs on and how to start using it.",
+    date: "2026-08-16",
+    readTime: "11 min read",
+    category: "Guide",
+  },
+  {
+    slug: "is-iptv-legal-in-the-uk",
+    heroImage: "/images/blog/is-iptv-legal-in-the-uk.webp",
+    title: "Is IPTV Legal In The UK? A Plain-English 2026 Guide",
+    excerpt:
+      "The honest answer on IPTV legality in the UK — the technology itself is fully legal, what actually determines whether a service is legal, what UK viewers do and do not risk, and how to tell a legitimate IPTV provider from an unlicensed one.",
+    date: "2026-08-16",
+    readTime: "10 min read",
+    category: "Guide",
+  },
+  {
+    slug: "smart-iptv-app-guide-uk",
+    heroImage: "/images/blog/smart-iptv-app-guide-uk.webp",
+    title: "Smart IPTV App — Complete UK Guide To Setup, Playlists & Fixes (2026)",
+    excerpt:
+      "The full UK guide to the Smart IPTV app (SIPTV) — how to install it on Samsung and LG Smart TVs, register your MAC address, upload your M3U playlist, unlock beyond the trial and fix the errors people hit most often.",
+    date: "2026-08-16",
+    readTime: "11 min read",
+    category: "Tutorial",
+  },
+  {
+    slug: "iptv-player-apps-compared",
+    heroImage: "/images/blog/iptv-player-apps-compared.webp",
+    title: "IPTV Player Apps Compared — UK Guide To The Top IPTV Players In 2026",
+    excerpt:
+      "The top IPTV player apps compared for UK users — IPTV Smarters Pro, TiviMate, Smart IPTV, GSE Smart IPTV, Perfect Player, XCIPTV and VLC. Which one fits which device, and how to choose.",
+    date: "2026-08-16",
+    readTime: "12 min read",
+    category: "Comparison",
+  },
+  {
+    slug: "iptv-smarters-pro-uk-setup-guide",
+    heroImage: "/images/blog/iptv-smarters-pro-uk-setup-guide.webp",
+    title: "IPTV Smarters Pro — Complete UK Setup Guide For 2026",
+    excerpt:
+      "The full UK setup guide for IPTV Smarters Pro — install it on Fire Stick, Android, iOS, Smart TV, Windows and Mac, log in with Xtream Codes or an M3U line, and fix the errors people hit most often.",
+    date: "2026-08-16",
+    readTime: "11 min read",
+    category: "Tutorial",
+  },
+  {
     slug: "best-iptv-uk-guide-2026",
+    heroImage: "/images/blog/best-iptv-uk-guide-2026.webp",
     title: "Best IPTV UK 2026 — How To Choose A Cheap IPTV Provider",
     excerpt:
       "Finding the best IPTV service in the UK means looking beyond flashy promises. This guide breaks down the 7 criteria that matter most for British viewers — from channel quality and reliability to support and genuine value.",
@@ -386,15 +500,17 @@ export const BLOG_POSTS = [
   },
   {
     slug: "how-to-setup-iptv-firestick",
-    title: "How To Set Up A Cheap IPTV Subscription On Amazon Fire Stick",
+    heroImage: "/images/blog/how-to-setup-iptv-firestick.webp",
+    title: "IPTV On Firestick — Full UK Setup Guide For 2026",
     excerpt:
-      "A complete, beginner-friendly guide to installing and configuring IPTV on an Amazon Fire Stick. Stream in under 10 minutes using the step-by-step instructions below.",
-    date: "2026-03-20",
-    readTime: "6 min read",
+      "The complete UK guide to IPTV on an Amazon Fire Stick — which model to buy, how to sideload the app, how to log in, and how to fix the buffering, install and remote-mapping problems people hit most often.",
+    date: "2026-08-16",
+    readTime: "13 min read",
     category: "Tutorial",
   },
   {
     slug: "iptv-vs-traditional-tv",
+    heroImage: "/images/blog/iptv-vs-traditional-tv.webp",
     title: "Cheap IPTV vs Traditional UK TV Packages — Which Is Better Value In 2026?",
     excerpt:
       "An honest comparison of cheap IPTV and traditional UK TV packages. Costs, channel availability, picture quality, flexibility and value — everything needed to decide.",
@@ -404,6 +520,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: "cheap-iptv-subscription-uk-guide",
+    heroImage: "/images/blog/cheap-iptv-subscription-uk-guide.webp",
     title: "Cheap IPTV Subscription UK — Plans, Pricing & What's Included In 2026",
     excerpt:
       "A plain-English guide to choosing a cheap IPTV subscription in the UK: how the plans work, what every plan includes, how to judge value, and how to start in minutes.",
@@ -414,6 +531,7 @@ export const BLOG_POSTS = [
 ] as const;
 
 export const WHATSAPP_NUMBER = "447878757831"; // E.164 format, no + or spaces
+export const WHATSAPP_DISPLAY = "+44 7878 757831";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 /** Flat add-on, identical across every plan. */
@@ -422,44 +540,3 @@ export const PROXY_PROTECTION_PRICE = 15.0;
 /** Most extra connections that can be added to a plan on top of the 5 included. */
 export const MAX_EXTRA_CONNECTIONS = 5;
 
-/** The extra-connection price is per-plan — see `extraConnectionPrice` on PRICING_PLANS. */
-export function buildWhatsAppCheckoutUrl(params: {
-  planName: string;
-  planPrice: number;
-  proxyProtection?: boolean;
-  extraConnections?: number;
-  extraConnectionPrice?: number;
-}): string {
-  const extraConnectionPrice = params.extraConnectionPrice ?? 0;
-  const extraConnections = params.extraConnections ?? 0;
-
-  const lines = [
-    `Hi cheap-iptv.tv team! I'd like to subscribe to:`,
-    ``,
-    `Plan: ${params.planName} — £${params.planPrice.toFixed(2)}`,
-  ];
-
-  let total = params.planPrice;
-
-  if (params.proxyProtection) {
-    total += PROXY_PROTECTION_PRICE;
-    lines.push(`Add-on: Proxy Protection (+£${PROXY_PROTECTION_PRICE.toFixed(2)})`);
-  }
-
-  if (extraConnections > 0) {
-    const extraConnectionsTotal = extraConnectionPrice * extraConnections;
-    total += extraConnectionsTotal;
-    lines.push(
-      `Add-on: Extra Connection x${extraConnections} — £${extraConnectionPrice.toFixed(2)} each (+£${extraConnectionsTotal.toFixed(2)})`
-    );
-  }
-
-  if (total !== params.planPrice) {
-    lines.push(``, `Total: £${total.toFixed(2)}`);
-  }
-
-  lines.push(``, `Please send me the next steps to complete payment.`);
-
-  const message = encodeURIComponent(lines.join('\n'));
-  return `${WHATSAPP_URL}?text=${message}`;
-}

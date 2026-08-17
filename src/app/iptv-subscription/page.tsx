@@ -11,9 +11,9 @@ const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const LAST_UPDATED_DISPLAY = "29 June 2026";
 const LAST_UPDATED_ISO = "2026-06-29";
 
-const META_TITLE = "IPTV Subscription UK | Flexible Monthly & Yearly Plans";
+const META_TITLE = "IPTV Subscription Plans UK - 3, 6, 12 & 24 Month Terms";
 const META_DESCRIPTION =
-  "Pick the IPTV subscription that suits you — pay quarterly with no contract, or save with an annual plan. UK live channels, films and on-demand library included.";
+  "Compare IPTV subscription plans by term length — 3, 6, 12 or 24 months, all paid once, no contract, no auto-renewal. Pick the term that fits your household.";
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -112,16 +112,17 @@ export default function IPTVSubscriptionPage() {
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-purple-400/20 bg-white/[0.07] backdrop-blur-md px-5 py-2 text-sm text-purple-300 mb-6">
             <CalendarClock className="h-4 w-4 text-cyan-400" />
-            Flexible IPTV Subscription
+            IPTV Subscription Plans
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-5 leading-tight">
-            IPTV Subscription Plans —{" "}
-            <span className="gradient-text-hero">Monthly, Quarterly, Annual</span>
+            IPTV Subscription Plans UK —{" "}
+            <span className="gradient-text-hero">3, 6, 12 & 24 Month Terms</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-gray-300/90 mb-8 leading-relaxed">
-            Pick the term that suits your viewing habits. Three months to test the waters, twelve
-            months for the best balance, or two years for the deepest discount. No contract, no
-            stored card, no recurring charge.
+            Pick the subscription term that suits your household. Three months to test the service,
+            six months for seasonal viewing, twelve months as the balanced default, or two years
+            for committed households. Every term is one payment — no contract, no stored card, no
+            auto-renewal.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <SectionLink
@@ -129,14 +130,14 @@ export default function IPTVSubscriptionPage() {
               className="group relative flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-violet-600 via-purple-600 to-cyan-500 px-8 py-4 text-base font-semibold text-white transition-all hover:shadow-2xl hover:shadow-purple-500/30 active:scale-[0.98] w-full sm:w-auto justify-center"
             >
               <Play className="h-5 w-5 fill-current" />
-              Pick Your Subscription Length
+              Pick Your Subscription Term
             </SectionLink>
             <Link
-              href="/cheapest-iptv"
+              href="/iptv-channels"
               className="group flex items-center gap-2.5 rounded-2xl border border-white/15 bg-white/[0.06] backdrop-blur-sm px-8 py-4 text-base font-semibold text-white transition-all hover:border-purple-400/30 hover:bg-white/10 w-full sm:w-auto justify-center"
             >
               <MessageCircle className="h-5 w-5 text-cyan-400" />
-              See the Cheapest Rate
+              See What's Included
             </Link>
           </div>
         </div>
@@ -158,9 +159,9 @@ export default function IPTVSubscriptionPage() {
           <p className="text-lg leading-relaxed text-gray-700">
             An IPTV subscription should fit how you actually watch — not lock you into a multi-year
             contract for content you may not need next year. cheap-iptv.tv offers four subscription
-            lengths, each paid once at sign-up: quarterly, half-yearly, annual and two-year. The
-            longer the term, the lower the per-month rate, but every plan ships with an identical
-            feature set. This page lays out the four options, explains how the one-time billing
+            terms, each paid once at sign-up: three months, six months, twelve months and
+            twenty-four months. Every term ships the identical feature set; the term length is the
+            only variable. This page lays out the four options, explains how the one-time billing
             model works in practice and shows exactly how to stop the subscription when you want
             to — there is nothing to cancel because nothing rebills automatically. To see the full
             feature set and pricing, visit the{" "}
@@ -170,14 +171,14 @@ export default function IPTVSubscriptionPage() {
             >
               cheap IPTV UK homepage
             </Link>
-            ; or, if you would rather read the operational background first, the{" "}
+            ; or, if you would rather see the full IPTV cost breakdown first, the{" "}
             <Link
-              href="/iptv-service-provider"
+              href="/how-much-does-iptv-cost-uk"
               className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
             >
-              IPTV service provider page
+              UK IPTV cost guide
             </Link>{" "}
-            covers who runs the service.
+            covers pricing across every plan and the maths against traditional pay-TV.
           </p>
 
           <section className="space-y-4">
@@ -234,14 +235,13 @@ export default function IPTVSubscriptionPage() {
               The quarterly Bronze subscription is functionally equivalent to paying for three
               months of access in a single transaction; the annual Gold subscription is a year
               paid up front. The two longer plans collect a deeper discount precisely because they
-              spread the same up-front cost over more months. For the price-led version of the
-              same comparison — focused on the lowest per-month rate rather than the most flexible
-              term — see the dedicated{" "}
+              spread the same up-front cost over more months. For the full pricing grid alongside
+              features and channels, see the{" "}
               <Link
-                href="/cheapest-iptv"
+                href="/"
                 className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline"
               >
-                cheapest IPTV page
+                homepage pricing section
               </Link>
               .
             </p>
@@ -396,8 +396,8 @@ export default function IPTVSubscriptionPage() {
             <h2 className="text-lg font-bold text-foreground mb-3">Related reading</h2>
             <ul className="space-y-2 text-base text-gray-700">
               <li>
-                <Link href="/cheapest-iptv" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
-                  See the cheapest IPTV rate, priced line by line
+                <Link href="/" className="text-violet-600 hover:text-violet-700 underline-offset-2 hover:underline">
+                  Cheap IPTV UK — full pricing, features and channels
                 </Link>
               </li>
               <li>
