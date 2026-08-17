@@ -98,12 +98,12 @@ export default function BlogContent() {
               IPTV subscription
             </Link>{" "}
             decisions. Comparing options? Start with the{" "}
-            <Link href="/cheapest-iptv" className="text-cyan-300 hover:text-cyan-200 underline-offset-2 hover:underline">
-              cheapest IPTV plans
+            <Link href="/" className="text-cyan-300 hover:text-cyan-200 underline-offset-2 hover:underline">
+              cheap IPTV UK homepage
             </Link>{" "}
-            or see how we operate as an{" "}
-            <Link href="/iptv-service-provider" className="text-cyan-300 hover:text-cyan-200 underline-offset-2 hover:underline">
-              IPTV service provider
+            or check the full{" "}
+            <Link href="/how-much-does-iptv-cost-uk" className="text-cyan-300 hover:text-cyan-200 underline-offset-2 hover:underline">
+              UK IPTV cost breakdown
             </Link>
             .
           </motion.p>

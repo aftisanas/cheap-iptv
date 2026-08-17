@@ -1,33 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { SITE_URL } from "@/lib/constants";
 
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-});
-
-const outfit = Outfit({
-  variable: "--font-display",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["600", "700"],
-  preload: false,
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Cheap IPTV UK 2026 | Best Cheap IPTV Subscription From £3.33",
+    default: "Cheap IPTV UK 2026 - Cheapest IPTV Subscription From £3.33/mo",
     template: "%s | Cheap IPTV",
   },
   description:
-    "Cheap IPTV UK done right — 37,000 channels, 4K UHD, built-in VPN, five screens and a 30-day money-back guarantee. Buy the best-value cheap IPTV subscription in Britain from £3.33/month. Instant activation.",
+    "Cheap IPTV UK done right — the cheapest IPTV subscription in Britain from £3.33/mo. 37,000 channels, 4K UHD, built-in VPN, five screens and a 30-day money-back guarantee. Instant activation.",
   keywords: [
     "cheap iptv",
     "cheap iptv subscription",
@@ -70,15 +54,15 @@ export const metadata: Metadata = {
     locale: "en_GB",
     siteName: "Cheap IPTV",
     url: SITE_URL,
-    title: "Cheap IPTV UK 2026 — Maximum Streaming For Minimum Spend",
+    title: "Cheap IPTV UK 2026 — Cheapest IPTV Subscription From £3.33/mo",
     description:
-      "The cheap IPTV subscription thousands of UK homes trust. 37,000 channels, premium 4K quality, instant activation. Buy IPTV without breaking the bank.",
+      "The cheap IPTV subscription thousands of UK homes trust — and the cheapest published rate in Britain, from £3.33/mo. 37,000 channels, 4K UHD, instant activation.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cheap IPTV UK 2026 — Maximum Streaming For Minimum Spend",
+    title: "Cheap IPTV UK 2026 — Cheapest IPTV Subscription From £3.33/mo",
     description:
-      "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens, 30-day guarantee. From £3.33.",
+      "Cheap IPTV that never feels cheap. Cheapest IPTV subscription in the UK from £3.33/mo — 37,000 channels, 4K UHD, built-in VPN, 30-day guarantee.",
   },
   robots: {
     index: true,
@@ -105,10 +89,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en-GB"
-      className={`${inter.variable} ${outfit.variable} antialiased`}
-    >
+    <html lang="en-GB" className="antialiased">
       <body className="min-h-screen bg-background text-foreground font-(--font-sans)">
         <a
           href="#main"

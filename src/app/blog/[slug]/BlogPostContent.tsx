@@ -110,7 +110,9 @@ export default function BlogPostContent({ post, content, author, related }: Blog
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <User className="h-3 w-3" />
-                {author}
+                <Link href="/authors/james-bennett" className="hover:text-primary transition-colors underline-offset-2 hover:underline">
+                  {author}
+                </Link>
               </span>
               <span>
                 {new Date(post.date).toLocaleDateString("en-GB", {

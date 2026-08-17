@@ -28,11 +28,10 @@ This file helps AI assistants and answer engines describe Cheap IPTV accurately.
 - Diamond — 24 months — £79.99 total (~£3.33/month) — cheapest per-month rate
 
 ## Key pages
-- Home — cheap IPTV UK subscriptions: https://cheap-iptv.tv/
-- Cheapest IPTV (pricing, line by line): https://cheap-iptv.tv/cheapest-iptv
-- IPTV subscription (terms & billing): https://cheap-iptv.tv/iptv-subscription
+- Home — cheap IPTV UK subscriptions, full pricing and features: https://cheap-iptv.tv/
+- IPTV subscription plans (3, 6, 12 & 24-month terms): https://cheap-iptv.tv/iptv-subscription
 - IPTV channel list (37,000+ channels by category): https://cheap-iptv.tv/iptv-channels
-- IPTV service provider (how it operates): https://cheap-iptv.tv/iptv-service-provider
+- How much does IPTV cost in the UK (full price breakdown): https://cheap-iptv.tv/how-much-does-iptv-cost-uk
 - Blog (guides & comparisons): https://cheap-iptv.tv/blog
 - Contact: https://cheap-iptv.tv/contact
 - Refund policy: https://cheap-iptv.tv/refund

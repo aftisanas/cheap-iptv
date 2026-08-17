@@ -71,18 +71,10 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/iptv-service-provider"
+                  href="/how-much-does-iptv-cost-uk"
                   className="text-sm text-muted transition-colors hover:text-violet-600"
                 >
-                  IPTV Service Provider
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cheapest-iptv"
-                  className="text-sm text-muted transition-colors hover:text-violet-600"
-                >
-                  Cheapest IPTV
+                  IPTV Cost Guide
                 </Link>
               </li>
               <li>
@@ -90,7 +82,7 @@ export default function Footer() {
                   href="/iptv-subscription"
                   className="text-sm text-muted transition-colors hover:text-violet-600"
                 >
-                  IPTV Subscription
+                  IPTV Subscription Plans
                 </Link>
               </li>
               <li>

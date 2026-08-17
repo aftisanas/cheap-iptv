@@ -70,10 +70,10 @@ export default function HeroSection() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.1] mb-2"
         >
-          <span className="text-white">Cheap IPTV — The Best-Value</span>
+          <span className="text-white">Cheap IPTV UK — The Cheapest</span>
           <br />
-          <span className="text-white">IPTV UK </span>
-          <span className="gradient-text-hero">Subscription From £3.33</span>
+          <span className="text-white">IPTV </span>
+          <span className="gradient-text-hero">Subscription From £3.33/mo</span>
         </motion.h1>
 
         {/* Subtitle */}

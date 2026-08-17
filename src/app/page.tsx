@@ -23,9 +23,10 @@ export default function HomePage() {
   const websiteId = `${SITE_URL}/#website`;
   const webpageId = `${SITE_URL}/#webpage`;
   const productId = `${SITE_URL}/#product`;
+  const serviceId = `${SITE_URL}/#service`;
   const logoUrl = LOGO_URL;
-  // Offers stay valid for a year from build; refreshed on every deploy.
-  const priceValidUntil = `${new Date().getFullYear() + 1}-12-31`;
+  // Pinned business offer validity date
+  const priceValidUntil = "2026-12-31";
 
   return (
     <>
@@ -79,7 +80,7 @@ export default function HomePage() {
                 "@type": "WebPage",
                 "@id": webpageId,
                 url: SITE_URL,
-                name: "Cheap IPTV UK 2026 | Best Cheap IPTV Subscription From £3.33",
+                name: "Cheap IPTV UK 2026 - Cheapest IPTV Subscription From £3.33/mo",
                 inLanguage: "en-GB",
                 isPartOf: {
                   "@id": websiteId,
@@ -88,7 +89,7 @@ export default function HomePage() {
                   "@id": organizationId,
                 },
                 description:
-                  "Cheap IPTV that never feels cheap. 37,000 channels, 4K UHD, built-in VPN, five screens and a 30-day guarantee — the best-value IPTV subscription in Britain.",
+                  "Cheap IPTV UK done right — the cheapest IPTV subscription in Britain from £3.33/mo. 37,000 channels, 4K UHD, built-in VPN, five screens and a 30-day money-back guarantee.",
               },
             ],
           }),
@@ -126,6 +127,25 @@ export default function HomePage() {
                 returnFees: "https://schema.org/FreeReturn",
               },
             })),
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "@id": serviceId,
+            name: `${SITE_NAME} Subscription Service`,
+            serviceType: "IPTV subscription",
+            areaServed: "GB",
+            provider: {
+              "@id": organizationId,
+            },
+            description:
+              "Cheap IPTV UK subscription service offering 37,000+ live channels, 198,000+ films and series on demand, 4K UHD streaming, 5 screens, and built-in VPN protection.",
+            url: SITE_URL,
           }),
         }}
       />
