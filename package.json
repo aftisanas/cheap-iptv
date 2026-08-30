@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p ${PORT:-3002}",
+    "start": "next start -p ${PORT:-3020}",
     "lint": "eslint",
     "indexnow": "node scripts/indexnow-submit.mjs"
   },
