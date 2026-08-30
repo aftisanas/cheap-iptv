@@ -17,9 +17,10 @@ import {
   CHECKOUT_HUB_URL,
   CONTACT_EMAIL,
   EXTRA_CONNECTIONS_MAX,
+  PAYMENT_MARKS,
   PRICING_PLANS,
-  PROXY_PROTECTION_PRICE,
   SITE_SLUG,
+  TRUST_COPY,
   WHATSAPP_NUMBER,
 } from "@/lib/constants";
 import {
@@ -27,6 +28,7 @@ import {
   calculateOrderTotal,
 } from "@/lib/whatsapp";
 import { callCheckoutHub } from "@/lib/checkout";
+import { track } from "@/lib/analytics";
 import { toAccessLabel } from "@/lib/utils";
 
 type Plan = (typeof PRICING_PLANS)[number];
@@ -57,6 +59,16 @@ const CURRENCY = "£";
 // non-200, unparseable). The click handler appends `?text=…`, so no query
 // string is baked in here.
 const LOCAL_WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+/**
+ * How long the availability probe gets before we stop waiting on it.
+ *
+ * Measured hub latency is 1.0-2.0s warm, so the original 2.5s left almost no
+ * headroom and tripped on any cold start. The deadline exists to stop a hung
+ * request pinning the button, not to police normal latency — failing open
+ * costs nothing, so it can afford to be generous.
+ */
+const AVAILABILITY_TIMEOUT_MS = 6000;
 
 const formatPrice = (value: number) => `${CURRENCY}${value.toFixed(2)}`;
 
@@ -105,48 +117,85 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
+    track("checkout_viewed", { plan: plan.name, price: plan.price });
+  }, [plan.name, plan.price]);
+
+  useEffect(() => {
     let cancelled = false;
 
     const url = `${CHECKOUT_HUB_URL}/api/availability?siteSlug=${SITE_SLUG}&planName=${encodeURIComponent(plan.name)}`;
 
-    fetch(url)
+    // The probe sits between the buyer and the card checkout, so it gets a
+    // deadline. Without one, a hung request leaves the button disabled for as
+    // long as the browser is willing to wait.
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), AVAILABILITY_TIMEOUT_MS);
+
+    /**
+     * A failed probe is not evidence that the store is down — it is far more
+     * often an ad blocker, a privacy extension or a blocklist entry on the
+     * hub's domain, which is unrelated to this site. Treating that as "store
+     * unavailable" silently threw away the card checkout for buyers whose
+     * checkout would have worked. So the failure path now keeps the card
+     * checkout and reports itself instead.
+     */
+    const failOpen = (reason: string) => {
+      if (cancelled) return;
+      // console.warn, not console.error: this path is a handled, recoverable
+      // condition that leaves the buyer with a working card checkout. Next's
+      // dev overlay promotes console.error into a full-screen red panel, so
+      // an error here put a scary modal in front of a checkout that was fine.
+      // The signal that matters goes to `availability_failed` below.
+      console.warn("[checkout] availability probe failed:", reason);
+      track("availability_failed", { plan: plan.name, reason });
+      setAvailability({ state: "available" });
+    };
+
+    fetch(url, { signal: controller.signal })
       .then(async (res) => {
-        if (!res.ok) throw new Error(`Availability check failed (${res.status})`);
+        if (!res.ok) throw new Error(`status ${res.status}`);
         return res.json() as Promise<{ available?: boolean; whatsappUrl?: string }>;
       })
       .then((data) => {
         if (cancelled) return;
         if (data.available) {
           setAvailability({ state: "available" });
-        } else {
-          setAvailability({ state: "unavailable", whatsappUrl: data.whatsappUrl ?? "" });
+          return;
         }
+        // An explicit `available: false` is the one answer we trust, because
+        // only the hub knows whether its stores are actually accepting orders.
+        // It answers with an EMPTY whatsappUrl, not a missing one, so `??`
+        // would let "" through and hand the buyer a button that opens nothing.
+        track("checkout_degraded", { plan: plan.name, reason: "hub_reported_unavailable" });
+        setAvailability({
+          state: "unavailable",
+          whatsappUrl: data.whatsappUrl || LOCAL_WHATSAPP_URL,
+        });
       })
-      .catch((err) => {
-        if (cancelled) return;
-        // Probe failed (network, non-200, unparseable). The hub isn't the
-        // source of truth for whether WhatsApp works — fall back to the
-        // site's own number rather than pushing users to email.
-        console.error("[checkout] availability probe failed", err);
-        setAvailability({ state: "unavailable", whatsappUrl: LOCAL_WHATSAPP_URL });
-      });
+      .catch((err: unknown) => {
+        const aborted = err instanceof DOMException && err.name === "AbortError";
+        failOpen(aborted ? "timeout" : String(err));
+      })
+      .finally(() => clearTimeout(timer));
 
     return () => {
       cancelled = true;
+      clearTimeout(timer);
+      controller.abort();
     };
-  }, [plan.name]);
+  }, [plan.name, plan.price]);
 
   const total = calculateOrderTotal({
     planPrice: plan.price,
     proxyEnabled: proxyOn,
-    proxyPrice: PROXY_PROTECTION_PRICE,
+    proxyPrice: plan.proxyPrice,
     extraConnections,
     extraConnectionPrice: plan.extraConnectionPrice,
   });
 
   const extraConnectionsSubtotal = extraConnections * plan.extraConnectionPrice;
   const durationMonths = parseDurationMonths(plan.name);
-  const proxyPerMonth = durationMonths ? PROXY_PROTECTION_PRICE / durationMonths : null;
+  const proxyPerMonth = durationMonths ? plan.proxyPrice / durationMonths : null;
   const extraPerMonthPerConn = durationMonths
     ? plan.extraConnectionPrice / durationMonths
     : null;
@@ -178,6 +227,7 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
 
     setSubmitting(true);
     setSubmitError(null);
+    track("order_submitted", { plan: plan.name, total, proxy: proxyOn, extraConnections });
 
     try {
       const response = await callCheckoutHub({
@@ -191,6 +241,7 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
       });
 
       if (response.kind === "shopify") {
+        track("checkout_handoff", { plan: plan.name, total, orderId: response.orderId });
         window.location.href = response.checkoutUrl;
         return;
       }
@@ -206,6 +257,7 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
         total,
         reason: "STORE_CLAIMED_MIDFLIGHT",
       });
+      track("checkout_degraded", { plan: plan.name, reason: "store_claimed_midflight" });
       // Hub sometimes returns whatsapp-kind with an empty URL — treat that
       // as a hub degradation, not "no WhatsApp configured", and use the
       // site's own number instead of falling through to the mailto branch.
@@ -215,7 +267,24 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
       // Hub is down or unreachable. Rather than trapping the user on a red
       // error alert, degrade to the WhatsApp path using the site's own
       // number so the sale can still happen.
-      console.error("[checkout] callCheckoutHub failed", err);
+      // Also warn, not error — the buyer is handed the WhatsApp path, so
+      // nothing is broken from where they are standing. See failOpen above.
+      console.warn("[checkout] callCheckoutHub failed", err);
+      track("checkout_degraded", { plan: plan.name, reason: "hub_unreachable" });
+      // Record the lead HERE, not only when the buyer clicks through to
+      // WhatsApp. They have already typed their details and pressed Buy; if
+      // they give up at this point the order is invisible to the hub, which
+      // is exactly the customer we most need to know about.
+      logDiversion({
+        planName: plan.name,
+        email: trimmedEmail,
+        name: trimmedName,
+        phone: trimmedPhone,
+        proxyOn,
+        extraConnections,
+        total,
+        reason: "HUB_UNREACHABLE",
+      });
       switchToWhatsapp(LOCAL_WHATSAPP_URL);
       setSubmitting(false);
     }
@@ -331,7 +400,7 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
               <div className="space-y-3 text-sm">
                 <SummaryRow label={toAccessLabel(plan.name)} value={formatPrice(plan.price)} />
                 {proxyOn && (
-                  <SummaryRow label="Proxy Protection" value={`+${formatPrice(PROXY_PROTECTION_PRICE)}`} />
+                  <SummaryRow label="Proxy Protection" value={`+${formatPrice(plan.proxyPrice)}`} />
                 )}
                 {extraConnections > 0 && (
                   <SummaryRow
@@ -484,7 +553,7 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
                     <div className="text-xs font-bold text-accent">
                       {proxyPerMonth !== null
                         ? `+${formatPrice(proxyPerMonth)}/month`
-                        : `+${formatPrice(PROXY_PROTECTION_PRICE)}`}
+                        : `+${formatPrice(plan.proxyPrice)}`}
                     </div>
                     <button
                       type="button"
@@ -653,9 +722,45 @@ function CheckoutForPlan({ plan }: { plan: Plan }) {
                 onWhatsapp={handleWhatsappClick}
               />
 
+              {/* The subtitle has to match the route the buyer is actually
+                  about to take. `CHECKOUT_COPY.buttonSubtitle` describes the
+                  WhatsApp flow and is only correct when the hub has told us
+                  the store is unavailable. */}
               <div className="text-center text-xs text-muted">
-                {CHECKOUT_COPY.buttonSubtitle}
+                {availability.state === "available"
+                  ? TRUST_COPY.handoff
+                  : CHECKOUT_COPY.buttonSubtitle}
               </div>
+
+              {/* Card marks sit at the decision point, not just in the footer. */}
+              <ul className="flex flex-wrap items-center justify-center gap-2">
+                {PAYMENT_MARKS.map((mark) => (
+                  /* White artwork on transparency — it needs a dark chip to be
+                     visible against the checkout's light panel. */
+                  <li
+                    key={mark.id}
+                    className="flex h-6 items-center justify-center rounded border border-slate-700/50 bg-slate-800 px-2"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/trust/${mark.id}.webp`}
+                      alt={mark.name}
+                      width={40}
+                      height={26}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-3.5 w-auto"
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-center text-xs font-medium text-foreground">
+                {TRUST_COPY.oneTime}
+              </p>
+              <p className="text-center text-xs text-muted">
+                {TRUST_COPY.currency}
+              </p>
 
               <div className="flex items-center justify-center gap-2 text-xs text-muted">
                 <Shield className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
@@ -764,24 +869,39 @@ function logDiversion(params: {
   total: number;
   reason: string;
 }) {
-  try {
-    fetch(`${CHECKOUT_HUB_URL}/api/diversion`, {
+  const body = JSON.stringify({
+    siteSlug: SITE_SLUG,
+    planName: params.planName,
+    email: params.email || undefined,
+    name: params.name || undefined,
+    phone: params.phone || undefined,
+    proxyProtection: params.proxyOn,
+    extraConnections: params.extraConnections,
+    amountCents: Math.round(params.total * 100),
+    reason: params.reason,
+  });
+
+  const post = (url: string) =>
+    fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       keepalive: true,
-      body: JSON.stringify({
-        siteSlug: SITE_SLUG,
-        planName: params.planName,
-        email: params.email || undefined,
-        name: params.name || undefined,
-        phone: params.phone || undefined,
-        proxyProtection: params.proxyOn,
-        extraConnections: params.extraConnections,
-        amountCents: Math.round(params.total * 100),
-        reason: params.reason,
-      }),
-    }).catch(() => {});
+      body,
+    });
+
+  try {
+    // Straight to the hub first — unchanged, and the only hop when it works.
+    post(`${CHECKOUT_HUB_URL}/api/diversion`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`status ${res.status}`);
+      })
+      .catch(() => {
+        // The hub is a third-party domain here, so a failure is as likely to
+        // be an ad blocker as an outage. Retry through our own origin, which
+        // extensions do not block, and let the server make the hop.
+        post("/api/lead").catch(() => {});
+      });
   } catch {
-    // no-op
+    // Lead capture must never be able to break the checkout.
   }
 }

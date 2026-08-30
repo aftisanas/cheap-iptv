@@ -6,7 +6,6 @@ import {
   CHECKOUT_COPY,
   EXTRA_CONNECTION_PRICE,
   EXTRA_CONNECTIONS_MAX,
-  PROXY_PROTECTION_PRICE,
   SITE_NAME,
 } from "@/lib/constants";
 import { buildWhatsAppCheckoutUrl, calculateOrderTotal } from "@/lib/whatsapp";
@@ -17,8 +16,8 @@ type OrderSummaryModalProps = {
   onClose: () => void;
   planName: string;
   planPrice: number;
-  /** Per-plan proxy price. Defaults to the flat PROXY_PROTECTION_PRICE if omitted. */
-  proxyPrice?: number;
+  /** Per-plan proxy price — the add-on covers the whole term. */
+  proxyPrice: number;
   /** Per-plan unit price for one extra connection over the full term. */
   extraConnectionPrice?: number;
   currency?: string;
@@ -32,7 +31,7 @@ export default function OrderSummaryModal({
   onClose,
   planName,
   planPrice,
-  proxyPrice = PROXY_PROTECTION_PRICE,
+  proxyPrice,
   extraConnectionPrice = EXTRA_CONNECTION_PRICE,
   currency = "£",
 }: OrderSummaryModalProps) {
