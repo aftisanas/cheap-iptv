@@ -27,6 +27,37 @@ export const CHECKOUT_COPY = {
     `+£${price.toFixed(2)} per extra connection`,
 } as const;
 
+/**
+ * Payment is taken by Shopify Payments on a Shopify-hosted checkout, which
+ * lives on a different domain to this site. An unannounced domain change at
+ * the moment the card comes out is the single loudest scam signal we can send,
+ * so we name the handoff before it happens rather than letting it surprise
+ * anyone. Wording must stay true to the real flow — see PAYMENT_MARKS.
+ */
+export const TRUST_COPY = {
+  /** Shown next to the plan buttons and on the checkout page. */
+  handoff:
+    "You'll finish payment on our secure Shopify checkout — the same system used by millions of UK stores.",
+  /**
+   * The fear here is a recurring charge from a service the buyer has just met.
+   * We answer that, and only that: there is no subscription product, so nothing
+   * renews. We deliberately do NOT claim "no stored card" — checkout offers
+   * Shop Pay, which saves cards by design.
+   */
+  oneTime: "One-time payment — no subscription, nothing renews automatically.",
+  /** Non-UK visitors are a large share of traffic. Say the billing currency up front. */
+  currency: "Priced and charged in GBP. Your bank converts at its own rate.",
+  guarantee: "30-day money-back guarantee",
+} as const;
+
+/** Card marks shown at the decision points. Files live in /public/trust. */
+export const PAYMENT_MARKS = [
+  { id: "visa", name: "Visa" },
+  { id: "mastercard", name: "Mastercard" },
+  { id: "amex", name: "American Express" },
+  { id: "paypal", name: "PayPal" },
+] as const;
+
 // Single source of truth for the brand logo used in structured data.
 // Must point at a real file in /public (verified: /cheap-iptv.webp exists).
 export const LOGO_URL = `${SITE_URL}/cheap-iptv.webp`;
@@ -46,6 +77,7 @@ export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Why Us", href: "/#features" },
   { label: "Pricing", href: "/#pricing" },
+  { label: "Reviews", href: "/#reviews" },
   { label: "FAQ", href: "/#faq" },
 ] as const;
 
@@ -125,6 +157,7 @@ export const PRICING_PLANS = [
     perMonth: 8.66,
     period: "3 months",
     devices: 5,
+    proxyPrice: 4.75,
     extraConnectionPrice: 7.25,
     badge: "Low Commitment",
     discount: "-48%",
@@ -153,7 +186,11 @@ export const PRICING_PLANS = [
     perMonth: 6.0,
     period: "6 months",
     devices: 5,
-    extraConnectionPrice: 9.50,
+    proxyPrice: 9.50,
+    // Was 9.50 — the only site in the estate that disagreed. Every other
+    // property (and the hub's own add-on pricing) charges 14.50 for a 6-month
+    // extra connection, so this was undercharging by £5 per connection.
+    extraConnectionPrice: 14.50,
     badge: "Half-Year Savings",
     discount: "-49%",
     accentColor: "violet",
@@ -181,6 +218,7 @@ export const PRICING_PLANS = [
     perMonth: 4.17,
     period: "year",
     devices: 5,
+    proxyPrice: 19.00,
     extraConnectionPrice: 29.00,
     badge: "Most Popular — Save 50%",
     discount: "-50%",
@@ -209,6 +247,7 @@ export const PRICING_PLANS = [
     perMonth: 3.33,
     period: "2 years",
     devices: 5,
+    proxyPrice: 38.00,
     extraConnectionPrice: 58.00,
     badge: "Deepest Discount — Save 60%",
     discount: "-60%",
@@ -535,6 +574,11 @@ export const WHATSAPP_DISPLAY = "+44 7878 757831";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 /** Flat add-on, identical across every plan. */
+/**
+ * Fallback only. The add-on covers the whole term, so it is priced per plan —
+ * read `PRICING_PLANS[].proxyPrice` instead. This flat figure was quoting £15
+ * on every term while the rest of the estate charged 4.75 / 9.50 / 19 / 38.
+ */
 export const PROXY_PROTECTION_PRICE = 15.0;
 
 /** Most extra connections that can be added to a plan on top of the 5 included. */

@@ -4,11 +4,13 @@ import FeaturesSection from "@/components/FeaturesSection";
 import PricingSection from "@/components/PricingSection";
 import DevicesSection from "@/components/DevicesSection";
 import ChannelsSection from "@/components/ChannelsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+// import TestimonialsSection from "@/components/TestimonialsSection"; // Superseded by TrustPanels — see src/lib/trust-panels.ts
+import TrustPanels from "@/components/TrustPanels";
 import FAQSection from "@/components/FAQSection";
 import TrustSection from "@/components/TrustSection";
 import InternalLinksSection from "@/components/InternalLinksSection";
 import CTASection from "@/components/CTASection";
+import StickyBuyBar from "@/components/StickyBuyBar";
 import {
   CONTACT_EMAIL,
   FAQ_ITEMS,
@@ -36,11 +38,12 @@ export default function HomePage() {
       <PricingSection />
       <DevicesSection />
       <ChannelsSection />
-      <TestimonialsSection />
+      <TrustPanels />
       <FAQSection />
       <TrustSection />
       <InternalLinksSection />
       <CTASection />
+      <StickyBuyBar />
 
       {/* JSON-LD Structured Data */}
       <script

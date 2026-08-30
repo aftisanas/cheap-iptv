@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Check, Shield, CreditCard, Star, Crown, Gem, Award, Medal } from "lucide-react";
-import { PRICING_PLANS, CHECKOUT_MODE } from "@/lib/constants";
-import { cn, toAccessLabel } from "@/lib/utils";
+import { CHECKOUT_MODE, PAYMENT_MARKS, PRICING_PLANS, TRUST_COPY } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import { track } from "@/lib/analytics";
 import OrderSummaryModal from "./OrderSummaryModal";
 
 type PricingPlan = (typeof PRICING_PLANS)[number];
@@ -90,6 +91,12 @@ export default function PricingSection() {
   const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
 
   const handleChoosePlan = (plan: PricingPlan) => {
+    track("plan_selected", {
+      plan: plan.name,
+      planId: plan.id,
+      price: plan.price,
+      source: "pricing_section",
+    });
     if (CHECKOUT_MODE === "hub") {
       router.push(`/checkout?plan=${encodeURIComponent(plan.id)}`);
       return;
@@ -112,7 +119,7 @@ export default function PricingSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 200px 0px" }}
           className="text-center mb-14"
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-violet-50 border border-violet-200 px-5 py-2 text-sm font-semibold text-violet-700 mb-5">
@@ -141,7 +148,7 @@ export default function PricingSection() {
                 key={plan.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0, margin: "0px 0px 200px 0px" }}
                 transition={{ delay: i * 0.08 }}
                 onMouseEnter={() => setHoveredPlan(plan.id)}
                 onMouseLeave={() => setHoveredPlan(null)}
@@ -263,12 +270,16 @@ export default function PricingSection() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 200px 0px" }}
           className="mt-14 flex flex-wrap items-center justify-center gap-6 lg:gap-10"
         >
           {[
-            { icon: Shield, label: "SSL-secured Stripe & PayPal checkout" },
-            { icon: CreditCard, label: "30-day money-back guarantee" },
+            // Was "SSL-secured Stripe & PayPal checkout" — neither processor
+            // is in the flow. Payment is taken by Shopify Payments, so the
+            // line was naming the wrong companies directly above the button
+            // that opens the real card checkout.
+            { icon: CreditCard, label: "Secure card checkout" },
+            { icon: Shield, label: TRUST_COPY.guarantee },
             { icon: Star, label: "Instant delivery" },
           ].map((item) => (
             <div key={item.label} className="flex items-center gap-2 text-sm text-muted">
@@ -276,6 +287,45 @@ export default function PricingSection() {
               <span>{item.label}</span>
             </div>
           ))}
+        </motion.div>
+
+        {/* Payment marks + the handoff, named before it happens.
+            Checkout is hosted by Shopify on another domain; saying so here is
+            what turns an alarming redirect into an expected one. */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0, margin: "0px 0px 200px 0px" }}
+          className="mt-8 flex flex-col items-center gap-3"
+        >
+          <ul className="flex flex-wrap items-center justify-center gap-2.5">
+            {PAYMENT_MARKS.map((mark) => (
+              /* The marks are white artwork on transparency, so they need a
+                 dark chip to sit on — on the section's white ground they are
+                 invisible. */
+              <li
+                key={mark.id}
+                className="flex h-8 items-center justify-center rounded-md border border-slate-700/50 bg-slate-800 px-2.5"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/trust/${mark.id}.webp`}
+                  alt={mark.name}
+                  width={48}
+                  height={32}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-4 w-auto"
+                />
+              </li>
+            ))}
+          </ul>
+          <p className="max-w-md text-center text-xs leading-relaxed text-muted">
+            {TRUST_COPY.handoff}
+          </p>
+          <p className="text-center text-xs font-medium text-muted">
+            {TRUST_COPY.oneTime} {TRUST_COPY.currency}
+          </p>
         </motion.div>
       </div>
 
@@ -286,6 +336,7 @@ export default function PricingSection() {
         onClose={() => setSelectedPlan(null)}
         planName={selectedPlan?.name ?? ""}
         planPrice={selectedPlan?.price ?? 0}
+        proxyPrice={selectedPlan?.proxyPrice ?? 0}
         extraConnectionPrice={selectedPlan?.extraConnectionPrice ?? 0}
       />
     </section>
